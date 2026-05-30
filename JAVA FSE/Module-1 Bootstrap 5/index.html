@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Bootstrap 5 Community Event Portal – Discover, Register & Connect at local events near you." />
+  <meta name="author" content="Bootstrap5 Community Portal" />
+  <title>Bootstrap5 Community Event Portal</title>
+
+  <!-- ===================== Bootstrap 5 CDN ===================== -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"
+  />
+
+  <!-- ===================== Bootstrap Icons CDN ===================== -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- ===================== Google Fonts ===================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ===================== Custom CSS ===================== -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#mainNavbar" data-bs-offset="80">
+
+  <!-- ================================================
+       SECTION 1 – NAVIGATION BAR
+  ================================================ -->
+  <nav id="mainNavbar" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
+    <div class="container">
+
+      <!-- Brand Logo -->
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#home">
+        <span class="brand-icon bg-warning text-dark rounded-circle d-flex align-items-center justify-content-center">
+          <i class="bi bi-calendar-event-fill fs-5"></i>
+        </span>
+        <span class="fw-bold text-uppercase brand-name">
+          Community<span class="text-warning">Portal</span>
+        </span>
+      </a>
+
+      <!-- Mobile Hamburger Toggle -->
+      <button
+        class="navbar-toggler border-0"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarMain"
+        aria-controls="navbarMain"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Nav Links + Search -->
+      <div class="collapse navbar-collapse" id="navbarMain">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-1">
+          <li class="nav-item">
+            <a class="nav-link active px-3" href="#home">
+              <i class="bi bi-house-fill me-1"></i>Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-3" href="#events">
+              <i class="bi bi-calendar3 me-1"></i>Events
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-3" href="#gallery">
+              <i class="bi bi-images me-1"></i>Gallery
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-3" href="#contact">
+              <i class="bi bi-envelope-fill me-1"></i>Contact
+            </a>
+          </li>
+        </ul>
+
+        <!-- Search Form -->
+        <form class="d-flex gap-2" role="search" onsubmit="return false;">
+          <div class="input-group">
+            <input
+              class="form-control form-control-sm bg-secondary border-0 text-white"
+              type="search"
+              placeholder="Search events…"
+              aria-label="Search"
+              style="min-width:180px;"
+            />
+            <button class="btn btn-warning btn-sm" type="submit">
+              <i class="bi bi-search"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <!-- END Navigation -->
+
+
+  <!-- ================================================
+       SECTION 2 – HERO SECTION
+  ================================================ -->
+  <section id="home" class="hero-section d-flex align-items-center justify-content-center text-center text-white">
+    <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100"></div>
+    <div class="container position-relative z-1 py-5">
+      <span class="badge bg-warning text-dark text-uppercase fw-bold px-3 py-2 rounded-pill mb-3 d-inline-block">
+        <i class="bi bi-star-fill me-1"></i> Featured Events 2025
+      </span>
+      <h1 class="display-1 fw-bold text-uppercase mb-4 hero-title">
+        Connect.<br />Experience.<br />
+        <span class="text-warning">Celebrate.</span>
+      </h1>
+      <p class="lead mb-5 mx-auto hero-lead">
+        Discover hundreds of community events — workshops, concerts, food festivals, tech talks, and more.
+        Join thousands of locals building stronger communities together.
+      </p>
+      <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+        <a href="#events" class="btn btn-accent btn-lg px-5 fw-bold shadow-lg">
+          <i class="bi bi-calendar-check me-2"></i>Browse Events
+        </a>
+        <a href="#register" class="btn btn-outline-accent btn-lg px-5">
+          <i class="bi bi-person-plus me-2"></i>Register Now
+        </a>
+      </div>
+
+      <!-- Stats Row -->
+      <div class="row mt-5 g-3 justify-content-center">
+        <div class="col-auto">
+          <div class="hero-stat px-4 py-3 rounded-3">
+            <div class="fs-3 fw-bold text-warning">250+</div>
+            <div class="small text-white-50">Events Hosted</div>
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="hero-stat px-4 py-3 rounded-3">
+            <div class="fs-3 fw-bold text-warning">12K+</div>
+            <div class="small text-white-50">Community Members</div>
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="hero-stat px-4 py-3 rounded-3">
+            <div class="fs-3 fw-bold text-warning">48</div>
+            <div class="small text-white-50">Cities Covered</div>
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="hero-stat px-4 py-3 rounded-3">
+            <div class="fs-3 fw-bold text-warning">98%</div>
+            <div class="small text-white-50">Satisfaction Rate</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END Hero -->
+
+
+  <!-- ================================================
+       SECTION 3 – RESPONSIVE GRID EVENT CARDS
+       col-lg-4 | col-md-6 | col-12
+  ================================================ -->
+  <section id="events" class="py-5 bg-light">
+    <div class="container">
+      <!-- Section Header -->
+      <div class="text-center mb-5">
+        <span class="section-label text-uppercase fw-bold text-warning">Upcoming</span>
+        <h2 class="display-4 fw-bold mt-1">Featured Events</h2>
+        <p class="text-muted lead mx-auto" style="max-width:550px;">
+          Hand-picked experiences for every interest — from arts and culture to technology and wellness.
+        </p>
+      </div>
+
+      <!-- 3 cards desktop / 2 tablet / 1 mobile -->
+      <div class="row g-4">
+
+        <!-- Card 1 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card event-card h-100 border-0 shadow rounded-4 overflow-hidden">
+            <div class="card-img-wrapper position-relative">
+              <div class="card-img-placeholder bg-primary d-flex align-items-center justify-content-center" style="height:200px;">
+                <i class="bi bi-music-note-beamed text-white" style="font-size:4rem;"></i>
+              </div>
+              <span class="badge bg-warning text-dark position-absolute top-0 start-0 m-3 rounded-pill">
+                <i class="bi bi-music-note me-1"></i>Music
+              </span>
+              <!-- Notification Badge Overlay – position-absolute -->
+              <span class="badge bg-danger position-absolute top-0 end-0 m-3 rounded-circle notification-dot">12</span>
+            </div>
+            <div class="card-body p-4">
+              <h5 class="card-title fw-bold">Summer Beats Music Festival</h5>
+              <p class="card-text text-muted">
+                Three days of live performances from 40+ artists across 5 stages. Food trucks, art installations, and a dedicated kids' zone.
+              </p>
+              <ul class="list-unstyled small text-muted mb-3">
+                <li><i class="bi bi-calendar3 me-2 text-warning"></i>July 18–20, 2025</li>
+                <li><i class="bi bi-geo-alt me-2 text-warning"></i>Riverside Amphitheater, Austin TX</li>
+                <li><i class="bi bi-people me-2 text-warning"></i>5,000 Attendees Expected</li>
+              </ul>
+            </div>
+            <div class="card-footer bg-white border-0 px-4 pb-4">
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="fw-bold text-primary fs-5">$45 – $120</span>
+                <button class="btn btn-primary btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#successModal">
+                  Register <i class="bi bi-arrow-right ms-1"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card event-card h-100 border-0 shadow rounded-4 overflow-hidden">
+            <div class="card-img-wrapper position-relative">
+              <div class="card-img-placeholder bg-success d-flex align-items-center justify-content-center" style="height:200px;">
+                <i class="bi bi-cpu text-white" style="font-size:4rem;"></i>
+              </div>
+              <span class="badge bg-success position-absolute top-0 start-0 m-3 rounded-pill">
+                <i class="bi bi-cpu me-1"></i>Tech
+              </span>
+              <span class="badge bg-danger position-absolute top-0 end-0 m-3 rounded-circle notification-dot">5</span>
+            </div>
+            <div class="card-body p-4">
+              <h5 class="card-title fw-bold">DevSummit 2025 — AI & Beyond</h5>
+              <p class="card-text text-muted">
+                Keynotes, workshops, and networking sessions with industry leaders. Explore AI, Web3, cloud architecture and open-source tooling.
+              </p>
+              <ul class="list-unstyled small text-muted mb-3">
+                <li><i class="bi bi-calendar3 me-2 text-success"></i>August 5–6, 2025</li>
+                <li><i class="bi bi-geo-alt me-2 text-success"></i>Tech Hub Convention Center, SF</li>
+                <li><i class="bi bi-people me-2 text-success"></i>2,500 Attendees Expected</li>
+              </ul>
+            </div>
+            <div class="card-footer bg-white border-0 px-4 pb-4">
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="fw-bold text-success fs-5">$80 – $250</span>
+                <button class="btn btn-success btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#successModal">
+                  Register <i class="bi bi-arrow-right ms-1"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card event-card h-100 border-0 shadow rounded-4 overflow-hidden">
+            <div class="card-img-wrapper position-relative">
+              <div class="card-img-placeholder bg-warning d-flex align-items-center justify-content-center" style="height:200px;">
+                <i class="bi bi-egg-fried text-white" style="font-size:4rem;"></i>
+              </div>
+              <span class="badge bg-warning text-dark position-absolute top-0 start-0 m-3 rounded-pill">
+                <i class="bi bi-egg-fried me-1"></i>Food
+              </span>
+              <span class="badge bg-danger position-absolute top-0 end-0 m-3 rounded-circle notification-dot">8</span>
+            </div>
+            <div class="card-body p-4">
+              <h5 class="card-title fw-bold">International Food & Culture Fest</h5>
+              <p class="card-text text-muted">
+                Sample cuisines from 30+ countries, watch live cooking demos, enjoy cultural performances, and meet local artisan vendors.
+              </p>
+              <ul class="list-unstyled small text-muted mb-3">
+                <li><i class="bi bi-calendar3 me-2 text-warning"></i>September 12–14, 2025</li>
+                <li><i class="bi bi-geo-alt me-2 text-warning"></i>Millennium Park, Chicago IL</li>
+                <li><i class="bi bi-people me-2 text-warning"></i>8,000 Attendees Expected</li>
+              </ul>
+            </div>
+            <div class="card-footer bg-white border-0 px-4 pb-4">
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="fw-bold text-warning fs-5">Free – $30</span>
+                <button class="btn btn-warning btn-sm rounded-pill px-3 text-dark" data-bs-toggle="modal" data-bs-target="#successModal">
+                  Register <i class="bi bi-arrow-right ms-1"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card event-card h-100 border-0 shadow rounded-4 overflow-hidden">
+            <div class="card-img-wrapper position-relative">
+              <div class="card-img-placeholder bg-info d-flex align-items-center justify-content-center" style="height:200px;">
+                <i class="bi bi-palette text-white" style="font-size:4rem;"></i>
+              </div>
+              <span class="badge bg-info position-absolute top-0 start-0 m-3 rounded-pill">
+                <i class="bi bi-palette me-1"></i>Arts
+              </span>
+            </div>
+            <div class="card-body p-4">
+              <h5 class="card-title fw-bold">Urban Art & Design Expo</h5>
+              <p class="card-text text-muted">
+                A curated showcase of emerging and established visual artists, interactive murals, live spray-painting, and digital art installations.
+              </p>
+              <ul class="list-unstyled small text-muted mb-3">
+                <li><i class="bi bi-calendar3 me-2 text-info"></i>October 3–5, 2025</li>
+                <li><i class="bi bi-geo-alt me-2 text-info"></i>Brooklyn Art Warehouse, NY</li>
+                <li><i class="bi bi-people me-2 text-info"></i>3,000 Attendees Expected</li>
+              </ul>
+            </div>
+            <div class="card-footer bg-white border-0 px-4 pb-4">
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="fw-bold text-info fs-5">$20 – $60</span>
+                <button class="btn btn-info btn-sm rounded-pill px-3 text-white" data-bs-toggle="modal" data-bs-target="#successModal">
+                  Register <i class="bi bi-arrow-right ms-1"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card event-card h-100 border-0 shadow rounded-4 overflow-hidden">
+            <div class="card-img-wrapper position-relative">
+              <div class="card-img-placeholder bg-danger d-flex align-items-center justify-content-center" style="height:200px;">
+                <i class="bi bi-heart-pulse text-white" style="font-size:4rem;"></i>
+              </div>
+              <span class="badge bg-danger position-absolute top-0 start-0 m-3 rounded-pill">
+                <i class="bi bi-heart-pulse me-1"></i>Wellness
+              </span>
+            </div>
+            <div class="card-body p-4">
+              <h5 class="card-title fw-bold">Mindful Living Wellness Retreat</h5>
+              <p class="card-text text-muted">
+                Yoga sessions, meditation workshops, nutrition talks, and holistic therapy demos. Recharge your mind and body for the season ahead.
+              </p>
+              <ul class="list-unstyled small text-muted mb-3">
+                <li><i class="bi bi-calendar3 me-2 text-danger"></i>November 1–2, 2025</li>
+                <li><i class="bi bi-geo-alt me-2 text-danger"></i>Serenity Grounds, Portland OR</li>
+                <li><i class="bi bi-people me-2 text-danger"></i>600 Attendees Expected</li>
+              </ul>
+            </div>
+            <div class="card-footer bg-white border-0 px-4 pb-4">
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="fw-bold text-danger fs-5">$95 – $180</span>
+                <button class="btn btn-danger btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#successModal">
+                  Register <i class="bi bi-arrow-right ms-1"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card event-card h-100 border-0 shadow rounded-4 overflow-hidden">
+            <div class="card-img-wrapper position-relative">
+              <div class="card-img-placeholder bg-dark d-flex align-items-center justify-content-center" style="height:200px;">
+                <i class="bi bi-book text-warning" style="font-size:4rem;"></i>
+              </div>
+              <span class="badge bg-dark position-absolute top-0 start-0 m-3 rounded-pill border border-warning">
+                <i class="bi bi-book me-1 text-warning"></i><span class="text-warning">Lit</span>
+              </span>
+            </div>
+            <div class="card-body p-4">
+              <h5 class="card-title fw-bold">The Writers' Circle Book Festival</h5>
+              <p class="card-text text-muted">
+                Author readings, panel discussions, creative writing workshops, and a book market featuring 100+ independent publishers.
+              </p>
+              <ul class="list-unstyled small text-muted mb-3">
+                <li><i class="bi bi-calendar3 me-2"></i>December 6–7, 2025</li>
+                <li><i class="bi bi-geo-alt me-2"></i>Grand Library Hall, Boston MA</li>
+                <li><i class="bi bi-people me-2"></i>1,800 Attendees Expected</li>
+              </ul>
+            </div>
+            <div class="card-footer bg-white border-0 px-4 pb-4">
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="fw-bold fs-5">Free – $25</span>
+                <button class="btn btn-dark btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#successModal">
+                  Register <i class="bi bi-arrow-right ms-1"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /row -->
+    </div>
+  </section>
+  <!-- END Events Grid -->
+
+
+  <!-- ================================================
+       SECTION 4 – SIDEBAR LAYOUT (col-md-3 / col-md-9)
+  ================================================ -->
+  <section id="sidebar-section" class="py-5">
+    <div class="container">
+      <div class="row g-4">
+
+        <!-- Sidebar col-md-3 -->
+        <aside class="col-md-3 order-md-1">
+          <div class="sidebar-widget bg-dark text-white rounded-4 p-4 mb-4 shadow">
+            <h6 class="text-uppercase text-warning fw-bold mb-3">
+              <i class="bi bi-funnel-fill me-2"></i>Filter Events
+            </h6>
+            <div class="mb-3">
+              <label class="form-label small text-muted">Category</label>
+              <select class="form-select form-select-sm bg-secondary text-white border-0">
+                <option>All Categories</option>
+                <option>Music</option>
+                <option>Technology</option>
+                <option>Food & Culture</option>
+                <option>Arts</option>
+                <option>Wellness</option>
+                <option>Literature</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label small text-muted">Date Range</label>
+              <input type="date" class="form-control form-control-sm bg-secondary text-white border-0" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label small text-muted">Price Range</label>
+              <input type="range" class="form-range" min="0" max="300" />
+              <div class="d-flex justify-content-between small text-muted">
+                <span>Free</span><span>$300</span>
+              </div>
+            </div>
+            <button class="btn btn-warning w-100 btn-sm fw-bold">Apply Filters</button>
+          </div>
+
+          <!-- Popular Tags -->
+          <div class="sidebar-widget bg-light rounded-4 p-4 shadow-sm mb-4">
+            <h6 class="text-uppercase fw-bold mb-3">
+              <i class="bi bi-tags-fill me-2 text-warning"></i>Popular Tags
+            </h6>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="badge bg-primary rounded-pill">#Music</span>
+              <span class="badge bg-success rounded-pill">#Tech</span>
+              <span class="badge bg-warning text-dark rounded-pill">#Food</span>
+              <span class="badge bg-info rounded-pill">#Art</span>
+              <span class="badge bg-danger rounded-pill">#Wellness</span>
+              <span class="badge bg-dark rounded-pill">#Books</span>
+              <span class="badge bg-secondary rounded-pill">#Community</span>
+              <span class="badge bg-primary rounded-pill">#Outdoor</span>
+            </div>
+          </div>
+
+          <!-- Profile Card -->
+          <div class="card border-0 shadow rounded-4 text-center p-4">
+            <img
+              src="https://ui-avatars.com/api/?name=Jordan+Lee&background=ffc107&color=000&size=80&rounded=true&bold=true"
+              alt="Event Organizer"
+              class="rounded-circle mx-auto mb-3 border border-3 border-warning shadow"
+              width="80" height="80"
+            />
+            <h6 class="fw-bold mb-0">Jordan Lee</h6>
+            <small class="text-muted">Head Organizer</small>
+            <hr />
+            <p class="small text-muted mb-3">Passionate about building local communities through meaningful events.</p>
+            <div class="d-flex justify-content-center gap-3">
+              <a href="#" class="text-primary fs-5"><i class="bi bi-twitter-x"></i></a>
+              <a href="#" class="text-primary fs-5"><i class="bi bi-linkedin"></i></a>
+              <a href="#" class="text-danger fs-5"><i class="bi bi-instagram"></i></a>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Main Content col-md-9 -->
+        <main class="col-md-9 order-md-2">
+
+          <!-- Nav Tabs (req. 11) -->
+          <ul class="nav nav-tabs mb-4 border-bottom border-warning" id="contentTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active fw-semibold" id="upcoming-tab" data-bs-toggle="tab" data-bs-target="#upcoming" type="button" role="tab">
+                <i class="bi bi-calendar-check me-1"></i>Upcoming
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link fw-semibold" id="featured-tab" data-bs-toggle="tab" data-bs-target="#featured" type="button" role="tab">
+                <i class="bi bi-star me-1"></i>Featured
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link fw-semibold" id="past-tab" data-bs-toggle="tab" data-bs-target="#past" type="button" role="tab">
+                <i class="bi bi-clock-history me-1"></i>Past Events
+              </button>
+            </li>
+          </ul>
+
+          <div class="tab-content" id="contentTabsContent">
+            <!-- Upcoming Tab -->
+            <div class="tab-pane fade show active" id="upcoming" role="tabpanel">
+              <!-- Collapse / Expand Detail (req. 19D) -->
+              <div class="list-group shadow-sm rounded-4 overflow-hidden mb-4">
+                <div class="list-group-item list-group-item-action border-0 p-4">
+                  <div class="d-flex justify-content-between align-items-start flex-column flex-sm-row gap-2">
+                    <div>
+                      <span class="badge bg-primary rounded-pill me-2">Music</span>
+                      <strong>Summer Beats Music Festival</strong>
+                    </div>
+                    <button
+                      class="btn btn-sm btn-outline-primary rounded-pill flex-shrink-0"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#detail1"
+                      aria-expanded="false"
+                    >
+                      <i class="bi bi-chevron-down me-1"></i>Details
+                    </button>
+                  </div>
+                  <div class="collapse mt-3" id="detail1">
+                    <div class="p-3 bg-light rounded-3 small text-muted">
+                      <p class="mb-1"><i class="bi bi-clock me-1"></i> Gates open 2 PM daily. All-ages welcome.</p>
+                      <p class="mb-1"><i class="bi bi-map me-1"></i> Parking available on-site. Public transit encouraged.</p>
+                      <p class="mb-0"><i class="bi bi-info-circle me-1"></i> No outside food/beverages. ADA accessible.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="list-group-item list-group-item-action border-0 p-4">
+                  <div class="d-flex justify-content-between align-items-start flex-column flex-sm-row gap-2">
+                    <div>
+                      <span class="badge bg-success rounded-pill me-2">Tech</span>
+                      <strong>DevSummit 2025 — AI & Beyond</strong>
+                    </div>
+                    <button
+                      class="btn btn-sm btn-outline-success rounded-pill flex-shrink-0"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#detail2"
+                      aria-expanded="false"
+                    >
+                      <i class="bi bi-chevron-down me-1"></i>Details
+                    </button>
+                  </div>
+                  <div class="collapse mt-3" id="detail2">
+                    <div class="p-3 bg-light rounded-3 small text-muted">
+                      <p class="mb-1"><i class="bi bi-clock me-1"></i> Registration starts 8 AM. Keynote at 9 AM sharp.</p>
+                      <p class="mb-1"><i class="bi bi-wifi me-1"></i> High-speed WiFi and power stations throughout venue.</p>
+                      <p class="mb-0"><i class="bi bi-cup-hot me-1"></i> Meals and refreshments included in ticket price.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="list-group-item list-group-item-action border-0 p-4">
+                  <div class="d-flex justify-content-between align-items-start flex-column flex-sm-row gap-2">
+                    <div>
+                      <span class="badge bg-warning text-dark rounded-pill me-2">Food</span>
+                      <strong>International Food & Culture Fest</strong>
+                    </div>
+                    <button
+                      class="btn btn-sm btn-outline-warning rounded-pill flex-shrink-0"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#detail3"
+                      aria-expanded="false"
+                    >
+                      <i class="bi bi-chevron-down me-1"></i>Details
+                    </button>
+                  </div>
+                  <div class="collapse mt-3" id="detail3">
+                    <div class="p-3 bg-light rounded-3 small text-muted">
+                      <p class="mb-1"><i class="bi bi-clock me-1"></i> Open 11 AM – 9 PM all three days.</p>
+                      <p class="mb-1"><i class="bi bi-people me-1"></i> Family-friendly with dedicated children's activity zone.</p>
+                      <p class="mb-0"><i class="bi bi-cash-coin me-1"></i> Free entry. Food tokens available at booths.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Featured Tab -->
+            <div class="tab-pane fade" id="featured" role="tabpanel">
+              <div class="alert alert-warning border-0 rounded-4 shadow-sm">
+                <i class="bi bi-star-fill me-2"></i>
+                <strong>Editor's Pick:</strong> DevSummit 2025 is this season's most anticipated tech gathering. Secure your spot before early-bird pricing ends!
+              </div>
+              <!-- Nav Pills (req. 11) -->
+              <ul class="nav nav-pills gap-2 mb-4" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="pills-all-tab" data-bs-toggle="pill" data-bs-target="#pills-all" type="button">All</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="pills-free-tab" data-bs-toggle="pill" data-bs-target="#pills-free" type="button">Free</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="pills-paid-tab" data-bs-toggle="pill" data-bs-target="#pills-paid" type="button">Paid</button>
+                </li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane fade show active" id="pills-all">
+                  <p class="text-muted">Showing all featured events for the season. Use filters to narrow down your selection.</p>
+                </div>
+                <div class="tab-pane fade" id="pills-free">
+                  <p class="text-muted">Free events include the International Food & Culture Fest and The Writers' Circle Book Festival (basic entry).</p>
+                </div>
+                <div class="tab-pane fade" id="pills-paid">
+                  <p class="text-muted">Premium ticketed events with exclusive access, VIP lounges, and priority seating available for purchase.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Past Events Tab -->
+            <div class="tab-pane fade" id="past" role="tabpanel">
+              <p class="text-muted">Browse our archive of 250+ successfully hosted events. Filter by category, city, or date range to relive the memories.</p>
+              <div class="d-flex flex-wrap gap-2">
+                <span class="badge bg-secondary rounded-pill py-2 px-3">Spring Jazz Fest 2024</span>
+                <span class="badge bg-secondary rounded-pill py-2 px-3">WebDev Conf 2024</span>
+                <span class="badge bg-secondary rounded-pill py-2 px-3">Harvest Food Fair 2024</span>
+                <span class="badge bg-secondary rounded-pill py-2 px-3">Mural Arts Weekend 2024</span>
+                <span class="badge bg-secondary rounded-pill py-2 px-3">Yoga in the Park 2024</span>
+              </div>
+            </div>
+          </div>
+        </main>
+
+      </div>
+    </div>
+  </section>
+  <!-- END Sidebar Layout -->
+
+
+  <!-- ================================================
+       SECTION 5 – FLEXBOX UTILITIES SHOWCASE
+       flex-column mobile / flex-md-row desktop
+  ================================================ -->
+  <section class="py-5 bg-dark text-white">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="section-label text-uppercase fw-bold text-warning">Why Choose Us</span>
+        <h2 class="display-4 fw-bold mt-1">What We Offer</h2>
+      </div>
+
+      <!-- flex-column on mobile / flex-md-row on desktop -->
+      <div class="d-flex flex-column flex-md-row gap-4 justify-content-center align-items-stretch">
+
+        <div class="feature-box bg-gradient bg-primary rounded-4 p-4 text-center flex-fill shadow-lg">
+          <div class="feature-icon mb-3">
+            <i class="bi bi-shield-check-fill fs-1 text-white"></i>
+          </div>
+          <h5 class="fw-bold text-uppercase">Verified Organizers</h5>
+          <p class="text-white-75 small mb-0">Every event host is background-checked and community-vetted for your peace of mind.</p>
+        </div>
+
+        <div class="feature-box bg-gradient bg-success rounded-4 p-4 text-center flex-fill shadow-lg">
+          <div class="feature-icon mb-3">
+            <i class="bi bi-ticket-perforated-fill fs-1 text-white"></i>
+          </div>
+          <h5 class="fw-bold text-uppercase">Instant E-Tickets</h5>
+          <p class="text-white-75 small mb-0">Secure digital tickets delivered to your inbox within seconds of registration.</p>
+        </div>
+
+        <div class="feature-box bg-gradient bg-warning rounded-4 p-4 text-center flex-fill shadow-lg">
+          <div class="feature-icon mb-3">
+            <i class="bi bi-people-fill fs-1 text-dark"></i>
+          </div>
+          <h5 class="fw-bold text-dark text-uppercase">Community First</h5>
+          <p class="text-dark-75 small mb-0">Built by locals for locals — 100% of proceeds support community programmes.</p>
+        </div>
+
+        <div class="feature-box bg-gradient bg-info rounded-4 p-4 text-center flex-fill shadow-lg">
+          <div class="feature-icon mb-3">
+            <i class="bi bi-headset fs-1 text-white"></i>
+          </div>
+          <h5 class="fw-bold text-uppercase">24/7 Support</h5>
+          <p class="text-white-75 small mb-0">Live chat, email, and phone support available before, during, and after every event.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- END Flexbox Section -->
+
+
+  <!-- ================================================
+       SECTION 6 – TYPOGRAPHY SHOWCASE
+  ================================================ -->
+  <section class="py-5 bg-white">
+    <div class="container">
+      <div class="row align-items-center justify-content-center g-5">
+
+        <div class="col-lg-6 order-md-2">
+          <span class="section-label text-uppercase fw-bold text-warning">Typography</span>
+          <h1 class="display-1 fw-bold mt-1 lh-1">Bold.<br/>Clear.<br/><span class="text-warning">Impactful.</span></h1>
+          <p class="lead text-muted mt-3">
+            Great events deserve great communication. Our platform uses modern typographic principles to ensure information is always legible, beautiful, and action-inspiring.
+          </p>
+          <div class="mt-4">
+            <h4 class="fw-bold text-uppercase text-capitalize">Headline — fw-bold + text-uppercase</h4>
+            <p class="fw-light text-muted">Subtext displayed using fw-light and text-muted for contrast.</p>
+            <p class="display-4">Display-4 Heading</p>
+            <p class="text-muted small text-uppercase fw-bold">Text-muted · text-uppercase · fw-bold</p>
+          </div>
+        </div>
+
+        <div class="col-lg-6 order-md-1">
+          <!-- Colors & Backgrounds showcase (req. 14) -->
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="p-4 rounded-4 bg-primary bg-gradient text-white text-center shadow fw-bold">bg-primary</div>
+            </div>
+            <div class="col-6">
+              <div class="p-4 rounded-4 bg-success bg-gradient text-white text-center shadow fw-bold">bg-success</div>
+            </div>
+            <div class="col-6">
+              <div class="p-4 rounded-4 bg-warning bg-gradient text-dark text-center shadow fw-bold">bg-warning</div>
+            </div>
+            <div class="col-6">
+              <div class="p-4 rounded-4 bg-danger bg-gradient text-white text-center shadow fw-bold">bg-danger</div>
+            </div>
+            <div class="col-6">
+              <div class="p-4 rounded-4 bg-info bg-gradient text-white text-center shadow fw-bold">bg-info</div>
+            </div>
+            <div class="col-6">
+              <div class="p-4 rounded-4 bg-dark bg-gradient text-white text-center shadow fw-bold">bg-dark</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- END Typography -->
+
+
+  <!-- ================================================
+       SECTION 7 – GALLERY / CAROUSEL (req. 19C)
+  ================================================ -->
+  <section id="gallery" class="py-5 bg-light">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="section-label text-uppercase fw-bold text-warning">Memories</span>
+        <h2 class="display-4 fw-bold mt-1">Event Gallery</h2>
+        <p class="text-muted lead">Relive the moments. See what happens when community comes together.</p>
+      </div>
+
+      <!-- Carousel -->
+      <div id="galleryCarousel" class="carousel slide carousel-fade shadow-lg rounded-4 overflow-hidden" data-bs-ride="carousel">
+
+        <!-- Indicators -->
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+        </div>
+
+        <!-- Slides -->
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="carousel-placeholder bg-primary d-flex align-items-center justify-content-center" style="height:480px;">
+              <div class="text-center text-white p-4">
+                <i class="bi bi-music-note-beamed" style="font-size:5rem;"></i>
+                <h3 class="mt-3 fw-bold">Summer Beats 2024</h3>
+                <p class="lead opacity-75">Main Stage Night — 15,000 in attendance</p>
+              </div>
+            </div>
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Summer Beats Music Festival</h5>
+              <p>Three unforgettable nights of music under the stars.</p>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="carousel-placeholder bg-success d-flex align-items-center justify-content-center" style="height:480px;">
+              <div class="text-center text-white p-4">
+                <i class="bi bi-cpu" style="font-size:5rem;"></i>
+                <h3 class="mt-3 fw-bold">DevSummit 2024</h3>
+                <p class="lead opacity-75">AI Workshop — Sold Out in 48 Hours</p>
+              </div>
+            </div>
+            <div class="carousel-caption d-none d-md-block">
+              <h5>DevSummit 2024</h5>
+              <p>Packed keynote hall with 2,400 tech enthusiasts.</p>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="carousel-placeholder bg-warning d-flex align-items-center justify-content-center" style="height:480px;">
+              <div class="text-center text-dark p-4">
+                <i class="bi bi-egg-fried" style="font-size:5rem;"></i>
+                <h3 class="mt-3 fw-bold">Food & Culture Fest 2024</h3>
+                <p class="lead opacity-75">32 Countries · 120 Vendors · 1 Weekend</p>
+              </div>
+            </div>
+            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+              <h5>International Food Fest 2024</h5>
+              <p>Flavours from 32 nations in one magnificent park.</p>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="carousel-placeholder bg-info d-flex align-items-center justify-content-center" style="height:480px;">
+              <div class="text-center text-white p-4">
+                <i class="bi bi-palette" style="font-size:5rem;"></i>
+                <h3 class="mt-3 fw-bold">Urban Art Expo 2024</h3>
+                <p class="lead opacity-75">90 Artists · 40 Live Murals · 3 Days</p>
+              </div>
+            </div>
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Urban Art & Design Expo 2024</h5>
+              <p>Where creativity meets concrete and canvas.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </section>
+  <!-- END Gallery -->
+
+
+  <!-- ================================================
+       SECTION 8 – BUTTON SHOWCASE (req. 10)
+  ================================================ -->
+  <section class="py-5 bg-white">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="section-label text-uppercase fw-bold text-warning">UI Components</span>
+        <h2 class="display-4 fw-bold mt-1">Button Showcase</h2>
+      </div>
+
+      <!-- Solid Buttons -->
+      <h6 class="text-uppercase text-muted fw-bold mb-3">Solid Buttons</h6>
+      <div class="d-flex flex-wrap gap-2 mb-4">
+        <button class="btn btn-primary rounded-pill px-4"><i class="bi bi-check2-circle me-1"></i>Primary</button>
+        <button class="btn btn-secondary rounded-pill px-4">Secondary</button>
+        <button class="btn btn-success rounded-pill px-4"><i class="bi bi-check-circle me-1"></i>Success</button>
+        <button class="btn btn-danger rounded-pill px-4"><i class="bi bi-x-circle me-1"></i>Danger</button>
+        <button class="btn btn-warning text-dark rounded-pill px-4"><i class="bi bi-exclamation-circle me-1"></i>Warning</button>
+        <button class="btn btn-info text-white rounded-pill px-4"><i class="bi bi-info-circle me-1"></i>Info</button>
+        <button class="btn btn-dark rounded-pill px-4"><i class="bi bi-moon-fill me-1"></i>Dark</button>
+        <button class="btn btn-light border rounded-pill px-4">Light</button>
+      </div>
+
+      <!-- Outline Buttons -->
+      <h6 class="text-uppercase text-muted fw-bold mb-3">Outline Buttons</h6>
+      <div class="d-flex flex-wrap gap-2 mb-4">
+        <button class="btn btn-outline-primary rounded-pill px-4">Outline Primary</button>
+        <button class="btn btn-outline-secondary rounded-pill px-4">Outline Secondary</button>
+        <button class="btn btn-outline-success rounded-pill px-4">Outline Success</button>
+        <button class="btn btn-outline-danger rounded-pill px-4">Outline Danger</button>
+        <button class="btn btn-outline-warning rounded-pill px-4">Outline Warning</button>
+        <button class="btn btn-outline-info rounded-pill px-4">Outline Info</button>
+        <button class="btn btn-outline-dark rounded-pill px-4">Outline Dark</button>
+      </div>
+
+      <!-- Button Groups -->
+      <h6 class="text-uppercase text-muted fw-bold mb-3">Button Groups</h6>
+      <div class="d-flex flex-wrap gap-4 mb-4">
+        <div class="btn-group shadow-sm" role="group" aria-label="Day group">
+          <button class="btn btn-outline-primary active">Mon</button>
+          <button class="btn btn-outline-primary">Tue</button>
+          <button class="btn btn-outline-primary">Wed</button>
+          <button class="btn btn-outline-primary">Thu</button>
+          <button class="btn btn-outline-primary">Fri</button>
+        </div>
+        <div class="btn-group shadow-sm" role="group" aria-label="Size group">
+          <button class="btn btn-dark">Small</button>
+          <button class="btn btn-dark active">Medium</button>
+          <button class="btn btn-dark">Large</button>
+        </div>
+      </div>
+
+      <!-- Borders, Shadows, Rounded (req. 16) -->
+      <h6 class="text-uppercase text-muted fw-bold mb-3">Borders · Shadows · Rounded</h6>
+      <div class="d-flex flex-wrap gap-3 align-items-center">
+        <div class="p-3 border border-primary border-3 rounded">border-primary border-3</div>
+        <div class="p-3 border rounded-pill shadow">rounded-pill + shadow</div>
+        <div class="p-3 border rounded-circle shadow-lg" style="width:80px;height:80px;display:grid;place-items:center;">
+          <i class="bi bi-star-fill text-warning fs-4"></i>
+        </div>
+        <div class="p-3 shadow-lg rounded-4 bg-light">shadow-lg + rounded-4</div>
+        <!-- d-none / d-md-block (req. 15) -->
+        <div class="p-3 bg-success text-white rounded d-none d-md-block">d-none d-md-block</div>
+        <div class="p-3 bg-info text-white rounded d-lg-flex align-items-center gap-2">
+          <i class="bi bi-eye"></i> d-lg-flex
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END Buttons -->
+
+
+  <!-- ================================================
+       SECTION 9 – ALIGNMENT & REORDERING (req. 6)
+  ================================================ -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="section-label text-uppercase fw-bold text-warning">Layout</span>
+        <h2 class="display-4 fw-bold mt-1">Alignment & Order</h2>
+      </div>
+
+      <!-- justify-content-center + align-items-center -->
+      <div class="row justify-content-center align-items-center g-4 mb-5">
+        <div class="col-md-4">
+          <div class="card border-0 shadow-sm rounded-4 p-4 text-center h-100">
+            <i class="bi bi-arrow-left-right fs-2 text-primary mb-3"></i>
+            <h6 class="fw-bold">justify-content-center</h6>
+            <p class="text-muted small mb-0">Horizontally centres flex children within the row.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-0 shadow rounded-4 p-4 text-center h-100 bg-warning">
+            <i class="bi bi-align-center fs-2 text-dark mb-3"></i>
+            <h6 class="fw-bold">align-items-center</h6>
+            <p class="text-dark small mb-0">Vertically centres flex children within the row.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- order-md-1 / order-md-2 reordering demo -->
+      <div class="row g-4 border border-dashed rounded-4 p-3">
+        <div class="col-md-6 order-md-2">
+          <div class="bg-primary text-white p-4 rounded-4 h-100 d-flex flex-column justify-content-center">
+            <span class="badge bg-light text-dark mb-2 w-auto d-inline-block">order-md-2 (visual first on desktop)</span>
+            <h5 class="fw-bold">This block is order-md-2</h5>
+            <p class="mb-0 opacity-75">In HTML source it comes second, but on md+ screens it renders first thanks to Bootstrap order utilities.</p>
+          </div>
+        </div>
+        <div class="col-md-6 order-md-1">
+          <div class="bg-dark text-white p-4 rounded-4 h-100 d-flex flex-column justify-content-center">
+            <span class="badge bg-warning text-dark mb-2 w-auto d-inline-block">order-md-1 (visual second on desktop)</span>
+            <h5 class="fw-bold">This block is order-md-1</h5>
+            <p class="mb-0 opacity-75">In HTML it is first, but on md+ screens it renders second. Swap layout without touching markup.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END Alignment -->
+
+
+  <!-- ================================================
+       SECTION 10 – REGISTRATION FORM (req. 9)
+  ================================================ -->
+  <section id="register" class="py-5 register-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+            <!-- Card Header -->
+            <div class="card-header bg-dark text-white p-4 border-0">
+              <h3 class="mb-0 fw-bold">
+                <i class="bi bi-person-badge-fill me-2 text-warning"></i>Event Registration
+              </h3>
+              <p class="text-white-50 mb-0 mt-1 small">Fill in the details below to reserve your spot.</p>
+            </div>
+
+            <div class="card-body p-4 p-md-5">
+              <form id="registrationForm" novalidate>
+
+                <!-- Input Group: Name + Email side by side -->
+                <div class="row g-3 mb-3">
+                  <!-- form-floating: Name -->
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <input
+                        type="text"
+                        class="form-control rounded-3"
+                        id="fullName"
+                        placeholder="Full Name"
+                        required
+                        minlength="3"
+                      />
+                      <label for="fullName"><i class="bi bi-person me-1"></i>Full Name</label>
+                      <div class="invalid-feedback">Please enter your full name (min. 3 characters).</div>
+                      <div class="valid-feedback">Looks good!</div>
+                    </div>
+                  </div>
+                  <!-- form-floating: Email -->
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <input
+                        type="email"
+                        class="form-control rounded-3"
+                        id="emailAddress"
+                        placeholder="Email Address"
+                        required
+                      />
+                      <label for="emailAddress"><i class="bi bi-envelope me-1"></i>Email Address</label>
+                      <div class="invalid-feedback">Please enter a valid email address.</div>
+                      <div class="valid-feedback">Looks good!</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Input Group: Phone -->
+                <div class="mb-3">
+                  <div class="input-group has-validation">
+                    <span class="input-group-text bg-dark text-white border-0 rounded-start-3">
+                      <i class="bi bi-telephone-fill"></i>
+                    </span>
+                    <input
+                      type="tel"
+                      class="form-control rounded-end-3"
+                      id="phoneNumber"
+                      placeholder="Phone Number (e.g. +1 555 000 0000)"
+                      required
+                      pattern="[\+]?[0-9\s\-]{7,15}"
+                    />
+                    <div class="invalid-feedback">Please enter a valid phone number.</div>
+                  </div>
+                </div>
+
+                <!-- Event Category Select -->
+                <div class="form-floating mb-3">
+                  <select class="form-select rounded-3" id="eventCategory" required>
+                    <option value="" selected disabled>Choose a category</option>
+                    <option value="music">🎵 Music & Concerts</option>
+                    <option value="tech">💻 Technology & Innovation</option>
+                    <option value="food">🍜 Food & Culture</option>
+                    <option value="art">🎨 Arts & Design</option>
+                    <option value="wellness">🧘 Health & Wellness</option>
+                    <option value="literature">📚 Literature & Writing</option>
+                    <option value="sports">⚽ Sports & Recreation</option>
+                  </select>
+                  <label for="eventCategory"><i class="bi bi-grid me-1"></i>Event Category</label>
+                  <div class="invalid-feedback">Please select an event category.</div>
+                </div>
+
+                <!-- Message Textarea -->
+                <div class="form-floating mb-4">
+                  <textarea
+                    class="form-control rounded-3"
+                    id="messageText"
+                    placeholder="Leave a message…"
+                    style="height:120px;"
+                  ></textarea>
+                  <label for="messageText"><i class="bi bi-chat-text me-1"></i>Message (Optional)</label>
+                </div>
+
+                <!-- form-check: Checkboxes -->
+                <div class="mb-4">
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="emailUpdates" />
+                    <label class="form-check-label" for="emailUpdates">
+                      Send me event updates and newsletters
+                    </label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="smsAlerts" />
+                    <label class="form-check-label" for="smsAlerts">
+                      Send SMS reminders for registered events
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="agreeTerms" required />
+                    <label class="form-check-label" for="agreeTerms">
+                      I agree to the <a href="#" class="text-warning fw-semibold">Terms of Service</a> and
+                      <a href="#" class="text-warning fw-semibold">Privacy Policy</a>
+                    </label>
+                    <div class="invalid-feedback">You must agree before registering.</div>
+                  </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="d-grid">
+                  <button type="submit" class="btn btn-warning btn-lg fw-bold rounded-3 shadow" id="submitBtn">
+                    <i class="bi bi-send-fill me-2"></i>Complete Registration
+                  </button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END Registration Form -->
+
+
+  <!-- ================================================
+       SECTION 11 – FAQ ACCORDION (req. 19B)
+  ================================================ -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="text-center mb-5">
+            <span class="section-label text-uppercase fw-bold text-warning">Support</span>
+            <h2 class="display-4 fw-bold mt-1">Frequently Asked Questions</h2>
+            <p class="text-muted lead">Everything you need to know before attending an event.</p>
+          </div>
+
+          <div class="accordion accordion-flush shadow rounded-4 overflow-hidden" id="faqAccordion">
+
+            <div class="accordion-item border-0 border-bottom">
+              <h2 class="accordion-header">
+                <button class="accordion-button fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">
+                  <i class="bi bi-question-circle-fill text-warning me-2"></i>
+                  How do I register for an event?
+                </button>
+              </h2>
+              <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-muted">
+                  Simply find an event you're interested in, click the "Register" button on its card, fill in the registration form with your details, and complete the payment if applicable. You'll receive a confirmation email with your digital ticket instantly.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item border-0 border-bottom">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false">
+                  <i class="bi bi-question-circle-fill text-warning me-2"></i>
+                  Can I get a refund if I can't attend?
+                </button>
+              </h2>
+              <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-muted">
+                  Refund policies vary by event organiser. Most events offer full refunds up to 7 days before the event date, and partial refunds up to 48 hours before. Check the specific event's policy on its detail page. Our support team is also available 24/7 to assist.
+                </div>
+              </div>
+            </div>
+            
+            <div class="accordion-item border-0 border-bottom">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false">
+                  <i class="bi bi-question-circle-fill text-warning me-2"></i>
+                  Are events family-friendly?
+                </button>
+              </h2>
+              <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-muted">
+                  Many of our events are designed for all ages and include dedicated family zones, children's activities, and accessible facilities. Each event listing clearly indicates age recommendations, family-friendly features, and any restrictions.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item border-0 border-bottom">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false">
+                  <i class="bi bi-question-circle-fill text-warning me-2"></i>
+                  How do I become an event organiser?
+                </button>
+              </h2>
+              <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-muted">
+                  Anyone can apply to host events on our platform. Submit your organiser application through the "Host an Event" page, complete the verification process (background check + community review), and you'll be able to list events within 5 business days.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item border-0">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false">
+                  <i class="bi bi-question-circle-fill text-warning me-2"></i>
+                  Is there a mobile app available?
+                </button>
+              </h2>
+              <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-muted">
+                  Our mobile-optimised website works seamlessly on all devices. A dedicated iOS and Android app is currently in beta and will be publicly available in Q3 2025. Sign up for our newsletter to be the first to know when it launches.
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /accordion -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END FAQ -->
+
+
+  <!-- ================================================
+SECTION 12 – CONTACT (req. 2/19A trigger)
+  ================================================ -->
+  <section id="contact" class="py-5 contact-section bg-dark text-white">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="section-label text-uppercase fw-bold text-warning">Get In Touch</span>
+        <h2 class="display-4 fw-bold mt-1">Contact Us</h2>
+        <p class="text-white-50 lead">Questions? Partnerships? We'd love to hear from you.</p>
+      </div>
+      <div class="row g-4 justify-content-center">
+        <div class="col-md-4">
+          <div class="contact-card text-center p-4 rounded-4 bg-white bg-opacity-10 h-100">
+            <div class="mb-3"><i class="bi bi-geo-alt-fill fs-2 text-warning"></i></div>
+            <h6 class="fw-bold text-uppercase">Our Office</h6>
+            <p class="text-white-50 small mb-0">123 Community Ave, Suite 400<br/>Austin, TX 78701, USA</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="contact-card text-center p-4 rounded-4 bg-white bg-opacity-10 h-100">
+            <div class="mb-3"><i class="bi bi-telephone-fill fs-2 text-warning"></i></div>
+            <h6 class="fw-bold text-uppercase">Call Us</h6>
+            <p class="text-white-50 small mb-0">+1 (512) 000-0000<br/>Mon – Fri, 9 AM – 6 PM CST</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="contact-card text-center p-4 rounded-4 bg-white bg-opacity-10 h-100">
+            <div class="mb-3"><i class="bi bi-envelope-fill fs-2 text-warning"></i></div>
+            <h6 class="fw-bold text-uppercase">Email Us</h6>
+            <p class="text-white-50 small mb-0">hello@communityportal.io<br/>support@communityportal.io</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END Contact -->
+
+
+  <!-- ================================================
+SECTION 13 – NEWSLETTER STRIP + SPACING DEMO
+  ================================================ -->
+  <section class="py-5 bg-warning">
+    <div class="container">
+      <div class="row align-items-center justify-content-between g-4">
+        <div class="col-md-6">
+          <h3 class="fw-bold text-dark mb-1">Stay in the Loop</h3>
+          <p class="text-dark mb-0 opacity-75">Get event alerts, early-bird deals and community news — right to your inbox.</p>
+        </div>
+        <div class="col-md-5">
+          <div class="input-group shadow-sm">
+            <input type="email" class="form-control rounded-start-pill border-0 py-3" placeholder="Enter your email address" />
+            <button class="btn btn-dark px-4 rounded-end-pill fw-bold">
+              <i class="bi bi-bell-fill me-1"></i>Subscribe
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================
+       MODAL – Registration Success (req. 19A)
+  ================================================ -->
+  <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+        <div class="modal-header bg-warning border-0 p-4">
+          <h5 class="modal-title fw-bold" id="successModalLabel">
+            <i class="bi bi-check-circle-fill me-2"></i>Registration Confirmed!
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-5 text-center">
+          <div class="success-icon mb-4">
+            <div class="bg-warning bg-opacity-25 rounded-circle d-inline-flex align-items-center justify-content-center" style="width:90px;height:90px;">
+              <i class="bi bi-calendar-check-fill text-warning fs-1"></i>
+            </div>
+          </div>
+          <h4 class="fw-bold mb-2">You're all set!</h4>
+          <p class="text-muted mb-4">
+            Your spot has been reserved. A confirmation email with your digital ticket and event details has been sent to your registered email address.
+          </p>
+          <div class="d-flex gap-2 justify-content-center flex-wrap">
+            <a href="#events" class="btn btn-warning px-4 fw-bold" data-bs-dismiss="modal">
+              <i class="bi bi-calendar3 me-1"></i>Browse More Events
+            </a>
+            <button class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">
+              <i class="bi bi-x me-1"></i>Close
+            </button>
+          </div>
+        </div>
+        <div class="modal-footer bg-light border-0 justify-content-center pb-4">
+          <p class="text-muted small mb-0">Share your excitement:</p>
+          <div class="d-flex gap-3 ms-3">
+            <a href="#" class="text-primary fs-5"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" class="text-primary fs-5"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-danger fs-5"><i class="bi bi-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END Modal -->
+
+
+  <!-- ================================================
+       FIXED FOOTER (req. 17 – position-fixed)
+  ================================================ -->
+  <footer class="bg-dark text-white pt-5 pb-4">
+    <div class="container">
+      <div class="row g-4">
+
+        <!-- Brand Column -->
+        <div class="col-lg-4 col-md-6">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <span class="brand-icon bg-warning text-dark rounded-circle d-flex align-items-center justify-content-center" style="width:40px;height:40px;">
+              <i class="bi bi-calendar-event-fill"></i>
+            </span>
+            <span class="fw-bold text-uppercase fs-5">Community<span class="text-warning">Portal</span></span>
+          </div>
+          <p class="text-white-50 small mb-3">
+            Connecting communities through meaningful events since 2018. Discover, experience, and celebrate together.
+          </p>
+          <!-- Social Icons (req. 18) -->
+          <div class="d-flex gap-3">
+            <a href="#" class="btn btn-sm btn-outline-light rounded-circle social-btn" aria-label="Facebook">
+              <i class="bi bi-facebook"></i>
+            </a>
+            <a href="#" class="btn btn-sm btn-outline-light rounded-circle social-btn" aria-label="Instagram">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a href="#" class="btn btn-sm btn-outline-light rounded-circle social-btn" aria-label="LinkedIn">
+              <i class="bi bi-linkedin"></i>
+            </a>
+            <a href="#" class="btn btn-sm btn-outline-light rounded-circle social-btn" aria-label="Twitter X">
+              <i class="bi bi-twitter-x"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="col-lg-2 col-md-6">
+          <h6 class="text-uppercase text-warning fw-bold mb-3">Quick Links</h6>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="#home" class="footer-link">Home</a></li>
+            <li class="mb-2"><a href="#events" class="footer-link">Events</a></li>
+            <li class="mb-2"><a href="#gallery" class="footer-link">Gallery</a></li>
+            <li class="mb-2"><a href="#register" class="footer-link">Register</a></li>
+            <li class="mb-2"><a href="#contact" class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Event Categories -->
+        <div class="col-lg-3 col-md-6">
+          <h6 class="text-uppercase text-warning fw-bold mb-3">Categories</h6>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="#" class="footer-link"><i class="bi bi-music-note me-1"></i>Music & Concerts</a></li>
+            <li class="mb-2"><a href="#" class="footer-link"><i class="bi bi-cpu me-1"></i>Technology</a></li>
+            <li class="mb-2"><a href="#" class="footer-link"><i class="bi bi-egg-fried me-1"></i>Food & Culture</a></li>
+            <li class="mb-2"><a href="#" class="footer-link"><i class="bi bi-palette me-1"></i>Arts & Design</a></li>
+            <li class="mb-2"><a href="#" class="footer-link"><i class="bi bi-heart-pulse me-1"></i>Wellness</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter in Footer -->
+        <div class="col-lg-3 col-md-6">
+          <h6 class="text-uppercase text-warning fw-bold mb-3">Newsletter</h6>
+          <p class="text-white-50 small mb-3">Get the latest events straight to your inbox. No spam, ever.</p>
+          <div class="input-group mb-3">
+            <input type="email" class="form-control bg-secondary border-0 text-white" placeholder="your@email.com" />
+            <button class="btn btn-warning" type="button">
+              <i class="bi bi-send-fill"></i>
+            </button>
+          </div>
+          <!-- d-none d-md-block visibility demo (req. 15) -->
+          <p class="text-white-50 small d-none d-md-block">
+            <i class="bi bi-shield-check text-warning me-1"></i>We respect your privacy. Unsubscribe anytime.
+          </p>
+        </div>
+
+      </div>
+
+      <hr class="border-secondary mt-4 mb-3" />
+
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+        <p class="text-white-50 small mb-0">
+          &copy; 2025 Community Event Portal. All rights reserved.
+        </p>
+        <div class="d-flex gap-3">
+          <a href="#" class="text-white-50 small footer-link">Privacy Policy</a>
+          <a href="#" class="text-white-50 small footer-link">Terms of Service</a>
+          <a href="#" class="text-white-50 small footer-link">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- END Footer -->
+
+
+  <!-- ================================================
+       BACK-TO-TOP BUTTON (position-fixed)
+  ================================================ -->
+  <button id="backToTop" class="btn btn-warning rounded-circle shadow-lg position-fixed" style="bottom:30px;right:30px;width:48px;height:48px;display:none;z-index:9999;" aria-label="Back to top">
+    <i class="bi bi-arrow-up-short fs-5"></i>
+  </button>
+
+
+  <!-- ===================== Bootstrap Bundle JS ===================== -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmr1JSwBF+rQOF6EVX1JBQakC7B"
+    crossorigin="anonymous"
+  ></script>
+
+  <!-- ===================== Custom JS ===================== -->
+  <script src="js/script.js"></script>
+</body>
+</html>

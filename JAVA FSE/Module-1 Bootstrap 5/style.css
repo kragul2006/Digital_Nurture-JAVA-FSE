@@ -1,0 +1,703 @@
+/* =============================================================
+   Bootstrap5 Community Event Portal — Custom Stylesheet
+   style.css
+   Author: Community Portal Team
+   Description: Enhances Bootstrap 5 defaults with custom
+                animations, typography, colors & components.
+   ============================================================= */
+
+
+/* ─────────────────────────────────────────────────
+   1. CSS CUSTOM PROPERTIES (DESIGN TOKENS)
+───────────────────────────────────────────────── */
+:root {
+  --cp-yellow:        #ffc107;
+  --cp-yellow-light:  #fff3cd;
+  --cp-dark:          #1a1a2e;
+  --cp-dark-mid:      #16213e;
+  --cp-charcoal:      #212529;
+  --cp-text-muted:    #6c757d;
+  --cp-transition:    0.28s ease;
+  --cp-radius-lg:     1rem;
+  --cp-shadow:        0 4px 24px rgba(0,0,0,.10);
+  --cp-shadow-lg:     0 8px 48px rgba(0,0,0,.18);
+
+  /* Brand fonts */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+}
+
+
+/* ─────────────────────────────────────────────────
+   2. GLOBAL RESET & BASE
+───────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--cp-charcoal);
+  background: #fff;
+  overflow-x: hidden;
+  /* Offset for fixed navbar */
+  padding-top: 72px;
+}
+
+h1, h2, h3, .display-1, .display-4 {
+  font-family: var(--font-display);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Smooth transition for interactive elements */
+a,
+button,
+.card,
+.btn {
+  transition: all var(--cp-transition);
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 3px solid var(--cp-yellow);
+  outline-offset: 3px;
+}
+
+
+/* ─────────────────────────────────────────────────
+   3. NAVBAR
+───────────────────────────────────────────────── */
+#mainNavbar {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(26, 26, 46, 0.97) !important;
+  border-bottom: 1px solid rgba(255, 193, 7, 0.15);
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  letter-spacing: 1px;
+  font-size: 1.1rem;
+}
+
+.brand-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+
+.navbar .nav-link {
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  border-radius: 6px;
+  position: relative;
+  color: rgba(255,255,255,0.8) !important;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  color: var(--cp-yellow) !important;
+  background: rgba(255, 193, 7, 0.1);
+}
+
+/* Active underline indicator */
+.navbar .nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 2px;
+  background: var(--cp-yellow);
+  border-radius: 2px;
+}
+
+
+/* ─────────────────────────────────────────────────
+   4. HERO SECTION
+───────────────────────────────────────────────── */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(255,193,7,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(13,110,253,0.15) 0%, transparent 60%),
+    linear-gradient(135deg, #0d0d1a 0%, #1a1a2e 40%, #16213e 100%);
+  overflow: hidden;
+}
+
+/* Decorative grid overlay */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.hero-overlay {
+  background: rgba(0,0,0,0.08);
+}
+
+.hero-title {
+  font-size: clamp(2.8rem, 8vw, 6rem);
+  line-height: 1.0;
+  letter-spacing: -2px;
+  text-shadow: 0 4px 40px rgba(0,0,0,0.4);
+}
+
+.hero-lead {
+  max-width: 600px;
+  font-size: 1.15rem;
+  opacity: 0.85;
+  line-height: 1.7;
+}
+
+.hero-stat {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 12px;
+  min-width: 120px;
+}
+
+/* Hero entrance animation */
+.hero-section .container > * {
+  animation: fadeUp 0.7s both;
+}
+.hero-section .container > *:nth-child(1) { animation-delay: 0.1s; }
+.hero-section .container > *:nth-child(2) { animation-delay: 0.25s; }
+.hero-section .container > *:nth-child(3) { animation-delay: 0.4s; }
+.hero-section .container > *:nth-child(4) { animation-delay: 0.55s; }
+.hero-section .container > *:nth-child(5) { animation-delay: 0.7s; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ─────────────────────────────────────────────────
+   5. SECTION LABELS & HEADINGS
+───────────────────────────────────────────────── */
+.section-label {
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  display: inline-block;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.section-label::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 2px;
+  background: var(--cp-yellow);
+  border-radius: 2px;
+}
+
+
+/* ─────────────────────────────────────────────────
+   6. EVENT CARDS
+───────────────────────────────────────────────── */
+.event-card {
+  border-radius: var(--cp-radius-lg) !important;
+  box-shadow: var(--cp-shadow);
+  will-change: transform;
+}
+
+.event-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--cp-shadow-lg);
+}
+
+.card-img-placeholder {
+  transition: transform 0.4s ease;
+  overflow: hidden;
+}
+
+.event-card:hover .card-img-placeholder {
+  transform: scale(1.04);
+}
+
+/* Notification badge pulse */
+.notification-dot {
+  animation: pulse-badge 2s infinite;
+  font-size: 0.7rem;
+  min-width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes pulse-badge {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.15); }
+}
+
+
+/* ─────────────────────────────────────────────────
+   7. SIDEBAR
+───────────────────────────────────────────────── */
+.sidebar-widget {
+  transition: box-shadow var(--cp-transition);
+}
+
+.sidebar-widget:hover {
+  box-shadow: var(--cp-shadow-lg) !important;
+}
+
+
+/* ─────────────────────────────────────────────────
+   8. FEATURE BOXES (FLEXBOX SECTION)
+───────────────────────────────────────────────── */
+.feature-box {
+  transition: transform var(--cp-transition), box-shadow var(--cp-transition);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.feature-box:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.3) !important;
+}
+
+.feature-icon {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-white-75 {
+  color: rgba(255,255,255,0.75);
+}
+
+.text-dark-75 {
+  color: rgba(0,0,0,0.75);
+}
+
+
+/* ─────────────────────────────────────────────────
+   9. CAROUSEL / GALLERY
+───────────────────────────────────────────────── */
+.carousel-placeholder {
+  position: relative;
+  overflow: hidden;
+}
+
+#galleryCarousel {
+  box-shadow: var(--cp-shadow-lg);
+}
+
+#galleryCarousel .carousel-control-prev,
+#galleryCarousel .carousel-control-next {
+  width: 48px;
+  height: 48px;
+  background: rgba(255,193,7,0.85);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 1;
+  margin: 0 1rem;
+}
+
+#galleryCarousel .carousel-control-prev:hover,
+#galleryCarousel .carousel-control-next:hover {
+  background: var(--cp-yellow);
+}
+
+#galleryCarousel .carousel-control-prev-icon,
+#galleryCarousel .carousel-control-next-icon {
+  filter: invert(1);
+  width: 20px;
+  height: 20px;
+}
+
+#galleryCarousel .carousel-indicators [data-bs-slide-to] {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(255,255,255,0.5);
+  border: none;
+}
+
+#galleryCarousel .carousel-indicators .active {
+  background-color: var(--cp-yellow);
+  transform: scale(1.3);
+}
+
+
+/* ─────────────────────────────────────────────────
+   10. REGISTRATION FORM SECTION
+───────────────────────────────────────────────── */
+.register-section {
+  background:
+    linear-gradient(135deg, #f8f9fa 0%, #fff8e1 50%, #f8f9fa 100%);
+}
+
+/* Input focus ring override */
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--cp-yellow);
+  box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
+}
+
+/* Custom form-floating label colour */
+.form-floating > label {
+  color: var(--cp-text-muted);
+  font-size: 0.9rem;
+}
+
+/* Validation icon colours */
+.was-validated .form-control:valid,
+.form-control.is-valid {
+  border-color: #198754;
+}
+
+.was-validated .form-control:invalid,
+.form-control.is-invalid {
+  border-color: #dc3545;
+}
+
+
+/* ─────────────────────────────────────────────────
+   11. ACCORDION (FAQ)
+───────────────────────────────────────────────── */
+.accordion-button {
+  background: #fff;
+  font-size: 0.95rem;
+}
+
+.accordion-button:not(.collapsed) {
+  background: var(--cp-yellow-light);
+  color: var(--cp-charcoal);
+  box-shadow: none;
+  font-weight: 700;
+}
+
+.accordion-button::after {
+  filter: brightness(0.5);
+}
+
+.accordion-button:not(.collapsed)::after {
+  filter: none;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+  border-color: transparent;
+}
+
+
+/* ─────────────────────────────────────────────────
+   12. BUTTONS
+───────────────────────────────────────────────── */
+.btn {
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.btn-warning {
+  color: #000;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+
+/* ─────────────────────────────────────────────────
+   13. CONTACT SECTION
+───────────────────────────────────────────────── */
+.contact-section {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.contact-card {
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: border-color var(--cp-transition), transform var(--cp-transition);
+}
+
+.contact-card:hover {
+  border-color: rgba(255, 193, 7, 0.5);
+  transform: translateY(-4px);
+}
+
+
+/* ─────────────────────────────────────────────────
+   14. FOOTER
+───────────────────────────────────────────────── */
+footer {
+  background: #0d0d1a !important;
+}
+
+.footer-link {
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.footer-link:hover {
+  color: var(--cp-yellow);
+  padding-left: 4px;
+}
+
+.social-btn {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-color: rgba(255,255,255,0.25) !important;
+  color: rgba(255,255,255,0.7) !important;
+}
+
+.social-btn:hover {
+  background-color: var(--cp-yellow) !important;
+  border-color: var(--cp-yellow) !important;
+  color: #000 !important;
+  transform: translateY(-3px) rotate(8deg);
+}
+
+
+/* ─────────────────────────────────────────────────
+   15. BACK TO TOP BUTTON
+───────────────────────────────────────────────── */
+#backToTop {
+  width: 48px;
+  height: 48px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+#backToTop.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  display: flex !important;
+}
+
+#backToTop:hover {
+  transform: translateY(-3px) !important;
+}
+
+
+/* ─────────────────────────────────────────────────
+   16. MODAL
+───────────────────────────────────────────────── */
+.modal-content {
+  border-radius: var(--cp-radius-lg) !important;
+}
+
+.success-icon {
+  animation: bounceIn 0.6s both;
+}
+
+@keyframes bounceIn {
+  0%   { transform: scale(0.5); opacity: 0; }
+  60%  { transform: scale(1.1); }
+  100% { transform: scale(1);   opacity: 1; }
+}
+
+
+/* ─────────────────────────────────────────────────
+   17. NAV TABS & PILLS CUSTOM
+───────────────────────────────────────────────── */
+.nav-tabs .nav-link {
+  color: var(--cp-text-muted);
+  border: none;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  padding: 0.6rem 1.2rem;
+  font-weight: 500;
+}
+
+.nav-tabs .nav-link:hover {
+  color: var(--cp-charcoal);
+  border-bottom-color: rgba(255,193,7,0.4);
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--cp-charcoal);
+  border-bottom: 3px solid var(--cp-yellow);
+  background: transparent;
+  font-weight: 700;
+}
+
+.nav-pills .nav-link {
+  border-radius: 50px;
+  font-weight: 500;
+  color: var(--cp-text-muted);
+  padding: 0.4rem 1.2rem;
+}
+
+.nav-pills .nav-link.active {
+  background: var(--cp-yellow);
+  color: #000;
+}
+
+.nav-pills .nav-link:hover:not(.active) {
+  background: rgba(255,193,7,0.12);
+  color: var(--cp-charcoal);
+}
+
+
+/* ─────────────────────────────────────────────────
+   18. LIST GROUP CUSTOM (Expand/Collapse Items)
+───────────────────────────────────────────────── */
+.list-group-item {
+  transition: background-color var(--cp-transition);
+}
+
+.list-group-item:hover {
+  background: #fffbf0;
+}
+
+
+/* ─────────────────────────────────────────────────
+   19. BORDER DASHED UTILITY
+───────────────────────────────────────────────── */
+.border-dashed {
+  border-style: dashed !important;
+  border-color: #dee2e6 !important;
+}
+
+
+/* ─────────────────────────────────────────────────
+   20. SPINNER BUTTON STATE
+───────────────────────────────────────────────── */
+.btn-loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.btn-loading::after {
+  content: '';
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(0,0,0,0.3);
+  border-top-color: #000;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: translateY(-50%) rotate(360deg); }
+}
+
+
+/* ─────────────────────────────────────────────────
+   21. SCROLL REVEAL UTILITY
+───────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ─────────────────────────────────────────────────
+   22. RESPONSIVE TYPOGRAPHY
+───────────────────────────────────────────────── */
+@media (max-width: 576px) {
+  .display-1 {
+    font-size: 2.8rem;
+  }
+  .display-4 {
+    font-size: 2rem;
+  }
+  .hero-title {
+    letter-spacing: -1px;
+  }
+  body {
+    padding-top: 62px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-stat {
+    min-width: 90px;
+    padding: 0.75rem 1rem;
+  }
+}
+
+
+/* ─────────────────────────────────────────────────
+   23. PRINT STYLES
+───────────────────────────────────────────────── */
+@media print {
+  #mainNavbar,
+  #backToTop,
+  footer .input-group,
+  .carousel-control-prev,
+  .carousel-control-next {
+    display: none !important;
+  }
+
+  body {
+    padding-top: 0;
+    font-size: 12pt;
+  }
+
+  .hero-section {
+    min-height: auto;
+    padding: 2rem 0;
+  }
+}
+
+
+/* ─────────────────────────────────────────────────
+   24. ACCESSIBILITY – REDUCED MOTION
+───────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
