@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Local Community Event Portal</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Task 14: jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════
+       HEADER
+  ══════════════════════════════════════ -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">🏘️</span>
+        <span class="logo-text">CommunityHub</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#events">Events</a>
+        <a href="#register-section">Register</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════
+       HERO
+  ══════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Your Town.<br/><span class="accent">Your Events.</span></h1>
+      <p class="hero-sub">Discover, register, and connect with events happening right in your neighbourhood.</p>
+      <a href="#events" class="btn-primary">Browse Events ↓</a>
+    </div>
+    <div class="hero-deco" aria-hidden="true">
+      <div class="deco-circle c1"></div>
+      <div class="deco-circle c2"></div>
+      <div class="deco-circle c3"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       CONTROLS: SEARCH + FILTER
+  ══════════════════════════════════════ -->
+  <section class="controls-bar" id="events">
+    <div class="controls-inner">
+      <!-- Task 8: keydown search -->
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search events by name…"
+          aria-label="Search events"
+        />
+      </div>
+      <!-- Task 8: onchange filter -->
+      <div class="filter-wrap">
+        <label for="categoryFilter">Category:</label>
+        <select id="categoryFilter">
+          <option value="all">All Categories</option>
+          <option value="music">🎵 Music</option>
+          <option value="workshop">🛠️ Workshop</option>
+          <option value="sports">⚽ Sports</option>
+          <option value="food">🍕 Food</option>
+          <option value="art">🎨 Art</option>
+          <option value="tech">💻 Tech</option>
+        </select>
+      </div>
+      <div class="filter-wrap">
+        <label for="locationFilter">Location:</label>
+        <select id="locationFilter">
+          <option value="all">All Locations</option>
+          <option value="downtown">Downtown</option>
+          <option value="north">North Side</option>
+          <option value="east">East End</option>
+          <option value="west">West Park</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       LOADING SPINNER (Task 9)
+  ══════════════════════════════════════ -->
+  <div id="loadingSpinner" class="spinner-wrap" style="display:none;">
+    <div class="spinner"></div>
+    <p>Fetching events…</p>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       EVENT CARDS GRID
+  ══════════════════════════════════════ -->
+  <main class="events-grid" id="eventsGrid" aria-live="polite">
+    <!-- JS will inject event cards here -->
+  </main>
+
+  <p class="no-events-msg" id="noEventsMsg" style="display:none;">
+    No events match your search. Try a different filter!
+  </p>
+
+  <!-- ══════════════════════════════════════
+       REGISTRATION FORM (Tasks 11, 12)
+  ══════════════════════════════════════ -->
+  <section class="register-section" id="register-section">
+    <div class="register-inner">
+      <h2>Register for an Event</h2>
+      <p class="register-sub">Fill in your details and we'll save your spot!</p>
+
+      <div id="formFeedback" class="form-feedback" style="display:none;"></div>
+
+      <form id="registrationForm" novalidate>
+        <div class="form-group">
+          <label for="regName">Full Name</label>
+          <input type="text" id="regName" name="name" placeholder="Jane Doe" autocomplete="name" />
+          <span class="field-error" id="nameError"></span>
+        </div>
+        <div class="form-group">
+          <label for="regEmail">Email Address</label>
+          <input type="email" id="regEmail" name="email" placeholder="jane@example.com" autocomplete="email" />
+          <span class="field-error" id="emailError"></span>
+        </div>
+        <div class="form-group">
+          <label for="regEvent">Select Event</label>
+          <select id="regEvent" name="event">
+            <option value="">— Choose an event —</option>
+          </select>
+          <span class="field-error" id="eventError"></span>
+        </div>
+        <div class="form-group form-check">
+          <input type="checkbox" id="regTerms" name="terms" />
+          <label for="regTerms">I agree to the community guidelines</label>
+          <span class="field-error" id="termsError"></span>
+        </div>
+        <!-- Task 14: jQuery click -->
+        <button type="submit" id="registerBtn" class="btn-primary">
+          Reserve My Spot
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       REGISTRATION STATS (Closures – Task 4)
+  ══════════════════════════════════════ -->
+  <section class="stats-section" id="about">
+    <div class="stats-inner">
+      <h2>Portal Stats</h2>
+      <div class="stats-grid" id="statsGrid">
+        <!-- filled by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════ -->
+  <footer class="site-footer">
+    <p>© 2025 CommunityHub · Built with ❤️ and Vanilla JS</p>
+    <p class="footer-note">All 14 JavaScript modules exercised in this portal.</p>
+  </footer>
+
+  <!-- Task 1: external script -->
+  <script src="main.js"></script>
+</body>
+</html>

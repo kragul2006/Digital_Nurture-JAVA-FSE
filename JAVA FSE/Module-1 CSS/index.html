@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CivicPulse — Community Event Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0d0d0d;
+      --paper: #faf8f3;
+      --warm: #f5f0e8;
+      --accent: #c8440a;
+      --gold: #d4a017;
+      --sage: #5a7a5f;
+      --slate: #3d4f6b;
+      --cream: #fffdf7;
+      --mid: #8a7f72;
+      --border: #e0d9cc;
+      --shadow: 0 4px 32px rgba(13,13,13,0.08);
+      --radius: 3px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE TEXTURE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ─── NAVIGATION ─── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--ink);
+      border-bottom: 3px solid var(--accent);
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-brand {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.1rem;
+      color: var(--paper);
+      letter-spacing: 0.08em;
+      text-decoration: none;
+    }
+
+    .nav-brand span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: rgba(250,248,243,0.7);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--accent);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover { color: var(--paper); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 88vh;
+      background: var(--ink);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      padding: 5rem 3.5rem 5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-tag::before {
+      content: '';
+      display: block;
+      width: 32px; height: 2px;
+      background: var(--accent);
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      font-weight: 900;
+      color: var(--paper);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      margin-top: 1.5rem;
+      font-size: 1.05rem;
+      color: rgba(250,248,243,0.55);
+      max-width: 400px;
+      font-weight: 300;
+    }
+
+    .hero-actions {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--paper);
+      border: none;
+      padding: 0.85rem 2rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: all 0.22s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      background: #a5360a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(200,68,10,0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--paper);
+      border: 1.5px solid rgba(250,248,243,0.3);
+      padding: 0.85rem 2rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.22s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--paper);
+      background: rgba(250,248,243,0.06);
+    }
+
+    .hero-right {
+      position: relative;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-grid-art {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(212,160,23,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,160,23,0.08) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .hero-event-card {
+      background: rgba(250,248,243,0.07);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(250,248,243,0.12);
+      border-radius: 4px;
+      padding: 2rem;
+      width: 320px;
+      position: relative;
+      z-index: 2;
+      animation: floatCard 6s ease-in-out infinite;
+    }
+
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0px) rotate(-1deg); }
+      50% { transform: translateY(-12px) rotate(1deg); }
+    }
+
+    .event-card-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--paper);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      padding: 3px 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .event-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--paper);
+      margin-bottom: 0.5rem;
+    }
+
+    .event-card-meta {
+      font-size: 0.8rem;
+      color: rgba(250,248,243,0.5);
+      font-family: 'Space Mono', monospace;
+    }
+
+    .event-card-attendees {
+      margin-top: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .avatar-stack { display: flex; }
+
+    .avatar {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      border: 2px solid #16213e;
+      margin-left: -8px;
+      first-of-type { margin-left: 0; }
+    }
+
+    .avatar:first-child { margin-left: 0; }
+
+    .avatar-count {
+      font-size: 0.75rem;
+      color: rgba(250,248,243,0.5);
+    }
+
+    /* ─── WELCOME BANNER (Task 3) ─── */
+    #welcomeBanner {
+      background: linear-gradient(135deg, #1a3a5c 0%, #1e4d7b 100%);
+      padding: 1.25rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    #welcomeBanner .welcome-text {
+      color: rgba(255,255,255,0.85);
+      font-size: 0.9rem;
+    }
+
+    #welcomeBanner strong { color: #fff; }
+
+    #welcomeBanner .special-offer {
+      display: inline-block;
+      color: #ff4d1c;
+      font-weight: 700;
+      font-size: 0.85rem;
+      background: rgba(255,77,28,0.12);
+      padding: 3px 10px;
+      border-radius: 2px;
+      border: 1px solid rgba(255,77,28,0.3);
+    }
+
+    .highlight {
+      background: linear-gradient(120deg, rgba(212,160,23,0.2) 0%, rgba(212,160,23,0.05) 100%);
+      border-left: 3px solid var(--gold);
+      padding: 0.1em 0.5em;
+    }
+
+    /* ─── SECTION SCAFFOLDING ─── */
+    section {
+      padding: 6rem 4rem;
+    }
+
+    .section-header {
+      margin-bottom: 3.5rem;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    /* ─── EVENTS SECTION ─── */
+    #events { background: var(--warm); }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .event-tile {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      transition: all 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .event-tile::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: var(--accent);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.3s ease;
+    }
+
+    .event-tile:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .event-tile:hover::before { transform: scaleY(1); }
+
+    .event-tile-date {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .event-tile h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .event-tile p {
+      font-size: 0.875rem;
+      color: var(--mid);
+      margin-bottom: 1.25rem;
+    }
+
+    .event-tile-fee {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--sage);
+      font-weight: 700;
+    }
+
+    /* ─── GALLERY (Task 4) ─── */
+    #gallery { background: var(--cream); }
+
+    .gallery-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 16px;
+    }
+
+    .gallery-table td {
+      text-align: center;
+      vertical-align: top;
+    }
+
+    .gallery-img-wrap {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      cursor: zoom-in;
+    }
+
+    .gallery-img-wrap::after {
+      content: '⊕ Zoom';
+      position: absolute;
+      inset: 0;
+      background: rgba(13,13,13,0.55);
+      color: var(--paper);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .gallery-img-wrap:hover::after { opacity: 1; }
+
+    .gallery-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      border: 3px solid var(--border);
+      transition: transform 0.4s ease;
+      background: var(--warm);
+    }
+
+    .gallery-img.enlarged {
+      transform: scale(2.5);
+      z-index: 10;
+      position: relative;
+      border-color: var(--accent);
+    }
+
+    .gallery-caption {
+      font-size: 0.78rem;
+      color: var(--mid);
+      margin-top: 0.5rem;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .gallery-caption strong {
+      display: block;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+
+    /* Gallery placeholder SVG images */
+    .gallery-placeholder {
+      width: 100%;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid var(--border);
+      font-size: 2.5rem;
+      border-radius: var(--radius);
+      transition: transform 0.4s ease;
+      cursor: zoom-in;
+    }
+
+    /* ─── REGISTRATION FORM (Task 5) ─── */
+    #registration {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    #registration .section-title { color: var(--paper); }
+    #registration .section-label { color: var(--gold); }
+    #registration .section-header { border-bottom-color: rgba(250,248,243,0.12); }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      max-width: 760px;
+    }
+
+    .form-field { display: flex; flex-direction: column; gap: 0.45rem; }
+    .form-field.full { grid-column: 1 / -1; }
+
+    .form-field label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(250,248,243,0.5);
+    }
+
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      background: rgba(250,248,243,0.05);
+      border: 1px solid rgba(250,248,243,0.12);
+      color: var(--paper);
+      padding: 0.75rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.22s, background 0.22s;
+      border-radius: var(--radius);
+    }
+
+    .form-field input::placeholder,
+    .form-field textarea::placeholder {
+      color: rgba(250,248,243,0.25);
+    }
+
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      border-color: var(--gold);
+      background: rgba(212,160,23,0.04);
+    }
+
+    .form-field select option { background: #1a1a1a; color: var(--paper); }
+
+    .form-field textarea { resize: vertical; min-height: 120px; }
+
+    .char-counter {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: rgba(250,248,243,0.35);
+      text-align: right;
+    }
+
+    .char-counter.warning { color: var(--accent); }
+
+    .phone-error {
+      font-size: 0.78rem;
+      color: var(--accent);
+      min-height: 1.2em;
+      font-family: 'Space Mono', monospace;
+    }
+
+    output#confirmMsg {
+      display: block;
+      margin-top: 1.5rem;
+      padding: 1rem 1.5rem;
+      background: rgba(90,122,95,0.15);
+      border: 1px solid rgba(90,122,95,0.4);
+      color: #7fbf7f;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      border-radius: var(--radius);
+      animation: fadeIn 0.4s ease;
+      display: none;
+    }
+
+    output#confirmMsg.show { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── FEE DISPLAY ─── */
+    .fee-display {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--gold);
+      padding: 0.6rem 1rem;
+      background: rgba(212,160,23,0.08);
+      border: 1px solid rgba(212,160,23,0.2);
+      border-radius: var(--radius);
+      display: none;
+    }
+
+    .fee-display.show { display: block; animation: fadeIn 0.3s ease; }
+
+    /* ─── VIDEO SECTION (Task 7) ─── */
+    #video-section {
+      background: var(--warm);
+    }
+
+    .video-wrap {
+      position: relative;
+      max-width: 700px;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(13,13,13,0.15);
+    }
+
+    .video-wrap video {
+      width: 100%;
+      display: block;
+    }
+
+    .video-status {
+      margin-top: 1rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--sage);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .video-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--sage);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    /* ─── PREFERENCES (Task 8) ─── */
+    #preferences { background: var(--cream); }
+
+    .prefs-card {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      max-width: 500px;
+      border-radius: 4px;
+      box-shadow: var(--shadow);
+    }
+
+    .prefs-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .prefs-card p {
+      font-size: 0.875rem;
+      color: var(--mid);
+      margin-bottom: 1.5rem;
+    }
+
+    .prefs-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .prefs-row select {
+      flex: 1;
+      padding: 0.7rem 1rem;
+      border: 1px solid var(--border);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      background: var(--paper);
+      color: var(--ink);
+      border-radius: var(--radius);
+      outline: none;
+    }
+
+    .prefs-status {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--sage);
+      margin-top: 0.75rem;
+    }
+
+    .btn-clear {
+      background: transparent;
+      border: 1.5px solid #d9534f;
+      color: #d9534f;
+      padding: 0.65rem 1.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: var(--radius);
+      transition: all 0.2s;
+    }
+
+    .btn-clear:hover {
+      background: #d9534f;
+      color: #fff;
+    }
+
+    /* ─── GEOLOCATION (Task 9) ─── */
+    #geolocation { background: var(--warm); }
+
+    .geo-card {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 3rem;
+      max-width: 560px;
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .geo-card::before {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(61,79,107,0.6) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .geo-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .geo-card p {
+      font-size: 0.875rem;
+      color: rgba(250,248,243,0.55);
+      margin-bottom: 1.75rem;
+    }
+
+    .geo-result {
+      margin-top: 1.5rem;
+      padding: 1rem 1.25rem;
+      background: rgba(250,248,243,0.05);
+      border: 1px solid rgba(250,248,243,0.1);
+      border-radius: var(--radius);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      color: rgba(250,248,243,0.7);
+      line-height: 1.8;
+      display: none;
+    }
+
+    .geo-result.show { display: block; animation: fadeIn 0.4s ease; }
+
+    .geo-error {
+      color: #ff7f7f;
+      font-size: 0.8rem;
+      margin-top: 0.75rem;
+      font-family: 'Space Mono', monospace;
+      display: none;
+    }
+
+    .geo-error.show { display: block; }
+
+    /* ─── DEVTOOLS SECTION (Task 10) ─── */
+    #devtools { background: var(--ink); color: var(--paper); }
+
+    #devtools .section-title { color: var(--paper); }
+    #devtools .section-label { color: var(--gold); }
+    #devtools .section-header { border-bottom-color: rgba(250,248,243,0.12); }
+
+    .devtools-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .dev-card {
+      background: rgba(250,248,243,0.03);
+      border: 1px solid rgba(250,248,243,0.08);
+      padding: 1.75rem;
+      border-radius: 4px;
+      transition: all 0.25s;
+    }
+
+    .dev-card:hover {
+      background: rgba(250,248,243,0.06);
+      border-color: rgba(250,248,243,0.15);
+    }
+
+    .dev-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .dev-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: var(--paper);
+    }
+
+    .dev-card p {
+      font-size: 0.82rem;
+      color: rgba(250,248,243,0.45);
+      line-height: 1.6;
+    }
+
+    .console-preview {
+      margin-top: 2.5rem;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(250,248,243,0.1);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .console-titlebar {
+      background: rgba(250,248,243,0.05);
+      padding: 0.6rem 1rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: rgba(250,248,243,0.3);
+      border-bottom: 1px solid rgba(250,248,243,0.08);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .console-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .console-body {
+      padding: 1rem 1.25rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      line-height: 2;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .log-line { color: rgba(250,248,243,0.6); }
+    .log-info { color: #7fbfff; }
+    .log-success { color: #7fbf7f; }
+    .log-warn { color: #ffd27f; }
+    .log-error { color: #ff7f7f; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #060606;
+      color: rgba(250,248,243,0.35);
+      padding: 3rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(250,248,243,0.06);
+    }
+
+    footer .brand {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.9rem;
+      color: rgba(250,248,243,0.6);
+    }
+
+    footer .brand span { color: var(--accent); }
+
+    footer nav { flex: 0; }
+
+    footer nav a {
+      font-size: 0.78rem;
+      color: rgba(250,248,243,0.3);
+      text-decoration: none;
+      margin-left: 2rem;
+      transition: color 0.2s;
+    }
+
+    footer nav a:hover { color: rgba(250,248,243,0.7); }
+
+    /* ─── MODAL / ZOOM OVERLAY ─── */
+    .zoom-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+
+    .zoom-overlay.show { display: flex; }
+
+    .zoom-overlay img,
+    .zoom-overlay .zoom-emoji {
+      max-width: 80vw;
+      max-height: 80vh;
+      border: 3px solid var(--gold);
+      border-radius: 4px;
+      font-size: 8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .zoom-close {
+      position: absolute;
+      top: 2rem; right: 2rem;
+      background: none;
+      border: none;
+      color: var(--paper);
+      font-size: 1.5rem;
+      cursor: pointer;
+      font-family: 'Space Mono', monospace;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+
+    .zoom-close:hover { opacity: 1; }
+
+    /* ─── ANIMATIONS ─── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 0.6s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+
+    /* ─── UNLOAD BANNER ─── */
+    .unload-banner {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: #c8440a;
+      color: #fff;
+      padding: 0.75rem 2rem;
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      z-index: 200;
+      transform: translateY(100%);
+      transition: transform 0.35s ease;
+    }
+
+    .unload-banner.show { transform: translateY(0); }
+
+    /* Responsive touch */
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      section { padding: 4rem 1.5rem; }
+      .events-grid { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .devtools-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1.5rem; }
+      footer nav a { margin-left: 1rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation (Task 2) -->
+  <nav>
+    <a href="#home" class="nav-brand">Civic<span>Pulse</span></a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#registration">Register</a></li>
+      <li><a href="#geolocation">Nearby</a></li>
+      <li><a href="help.html" target="_blank">Help ↗</a></li>
+    </ul>
+  </nav>
+
+  <!-- Welcome Banner (Task 3) -->
+  <div id="welcomeBanner">
+    <p class="welcome-text">
+      👋 Welcome back, <strong>Resident</strong>! You have
+      <span class="highlight">3 events</span> coming up this week.
+    </p>
+    <span class="special-offer">🎉 Early Bird Discount — 20% OFF this weekend!</span>
+  </div>
+
+  <!-- Hero / Home (Task 1 base template) -->
+  <section id="home" style="padding:0;">
+    <div class="hero">
+      <div class="hero-left">
+        <div class="hero-tag fade-up">City Council Initiative</div>
+        <h1 class="fade-up delay-1">
+          Your City,<br><em>Your Events</em>
+        </h1>
+        <p class="hero-sub fade-up delay-2">
+          Discover local happenings, register for community gatherings, and stay
+          connected with everything happening in your neighbourhood.
+        </p>
+        <div class="hero-actions fade-up delay-3">
+          <a href="#events" class="btn-primary">Browse Events</a>
+          <a href="#registration" class="btn-outline">Register Now</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-grid-art"></div>
+        <div class="hero-event-card">
+          <div class="event-card-badge">Featured</div>
+          <div class="event-card-title">City Founders' Day Parade</div>
+          <div class="event-card-meta">SAT 14 JUN · CENTRAL PARK · FREE</div>
+          <div class="event-card-attendees">
+            <div class="avatar-stack">
+              <div class="avatar" style="background:linear-gradient(135deg,#667eea,#764ba2);"></div>
+              <div class="avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c);"></div>
+              <div class="avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe);"></div>
+              <div class="avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7);"></div>
+            </div>
+            <span class="avatar-count">+248 attending</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events Section (Task 2) -->
+  <section id="events">
+    <div class="section-header">
+      <div>
+        <div class="section-label">What's On</div>
+        <h2 class="section-title">Upcoming Events</h2>
+      </div>
+    </div>
+    <div class="events-grid">
+      <div class="event-tile">
+        <div class="event-tile-date">Sat 14 Jun 2025</div>
+        <h3>Founders' Day Parade</h3>
+        <p>Annual city parade celebrating our community's rich heritage with floats, music, and food stalls.</p>
+        <div class="event-tile-fee">FREE ENTRY</div>
+      </div>
+      <div class="event-tile">
+        <div class="event-tile-date">Sun 22 Jun 2025</div>
+        <h3>Farmers' Market Fest</h3>
+        <p>Over 60 local producers showcasing organic produce, artisan crafts, and live folk performances.</p>
+        <div class="event-tile-fee">₹50 / PERSON</div>
+      </div>
+      <div class="event-tile">
+        <div class="event-tile-date">Fri 4 Jul 2025</div>
+        <h3>Youth Sports Gala</h3>
+        <p>Multi-sport tournament for ages 8–18. Medals, trophies and a grand closing ceremony.</p>
+        <div class="event-tile-fee">₹100 / TEAM</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery (Task 4) -->
+  <section id="gallery">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Past Events</div>
+        <h2 class="section-title">Photo Gallery</h2>
+      </div>
+    </div>
+    <table class="gallery-table">
+      <tbody>
+        <tr>
+          <td>
+            <div class="gallery-img-wrap" ondblclick="zoomImg(this, '🎉', 'Founders Day 2024')">
+              <div class="gallery-placeholder" style="background:linear-gradient(135deg,#667eea22,#764ba222);border:3px solid var(--border);" title="Founders Day Celebration 2024">🎉</div>
+            </div>
+            <div class="gallery-caption"><strong>Founders Day</strong>Annual city parade & celebration, 2024</div>
+          </td>
+          <td>
+            <div class="gallery-img-wrap" ondblclick="zoomImg(this, '🌾', 'Farmers Market 2024')">
+              <div class="gallery-placeholder" style="background:linear-gradient(135deg,#43e97b22,#38f9d722);border:3px solid var(--border);" title="Farmers Market Festival 2024">🌾</div>
+            </div>
+            <div class="gallery-caption"><strong>Farmers' Market</strong>Organic produce & artisan stalls, 2024</div>
+          </td>
+          <td>
+            <div class="gallery-img-wrap" ondblclick="zoomImg(this, '🏆', 'Sports Gala 2024')">
+              <div class="gallery-placeholder" style="background:linear-gradient(135deg,#f093fb22,#f5576c22);border:3px solid var(--border);" title="Youth Sports Gala 2024">🏆</div>
+            </div>
+            <div class="gallery-caption"><strong>Youth Sports Gala</strong>Multi-sport tournament finals, 2024</div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="gallery-img-wrap" ondblclick="zoomImg(this, '🎭', 'Cultural Fest 2024')">
+              <div class="gallery-placeholder" style="background:linear-gradient(135deg,#4facfe22,#00f2fe22);border:3px solid var(--border);" title="Cultural Festival 2024">🎭</div>
+            </div>
+            <div class="gallery-caption"><strong>Cultural Festival</strong>Dance, drama & music showcase, 2024</div>
+          </td>
+          <td>
+            <div class="gallery-img-wrap" ondblclick="zoomImg(this, '🌳', 'Green Drive 2024')">
+              <div class="gallery-placeholder" style="background:linear-gradient(135deg,#5a7a5f22,#38f9d722);border:3px solid var(--border);" title="Green Drive 2024">🌳</div>
+            </div>
+            <div class="gallery-caption"><strong>Green Drive</strong>City-wide tree planting initiative, 2024</div>
+          </td>
+          <td>
+            <div class="gallery-img-wrap" ondblclick="zoomImg(this, '🍲', 'Food Carnival 2024')">
+              <div class="gallery-placeholder" style="background:linear-gradient(135deg,#d4a01722,#c8440a22);border:3px solid var(--border);" title="Food Carnival 2024">🍲</div>
+            </div>
+            <div class="gallery-caption"><strong>Food Carnival</strong>Street food from 20+ local vendors, 2024</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="margin-top:1rem;font-size:0.8rem;color:var(--mid);font-family:'Space Mono',monospace;">
+      💡 Double-click any image to zoom
+    </p>
+  </section>
+
+  <!-- Registration Form (Task 5 & 6) -->
+  <section id="registration">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Join Us</div>
+        <h2 class="section-title">Event Registration</h2>
+      </div>
+    </div>
+    <div class="form-grid">
+      <!-- Name -->
+      <div class="form-field">
+        <label for="regName">Full Name *</label>
+        <input type="text" id="regName" name="name"
+               placeholder="e.g. Priya Sharma"
+               required autofocus>
+      </div>
+      <!-- Email -->
+      <div class="form-field">
+        <label for="regEmail">Email Address *</label>
+        <input type="email" id="regEmail" name="email"
+               placeholder="you@example.com" required>
+      </div>
+      <!-- Phone (Task 6 – blur validation) -->
+      <div class="form-field">
+        <label for="regPhone">Phone Number</label>
+        <input type="tel" id="regPhone" name="phone"
+               placeholder="+91 98765 43210"
+               onblur="validatePhone(this)">
+        <span class="phone-error" id="phoneError"></span>
+      </div>
+      <!-- Date -->
+      <div class="form-field">
+        <label for="regDate">Preferred Date *</label>
+        <input type="date" id="regDate" name="date" required>
+      </div>
+      <!-- Event type (Task 6 – onchange shows fee) -->
+      <div class="form-field">
+        <label for="regEvent">Event Type *</label>
+        <select id="regEvent" name="event" required onchange="showFee(this)">
+          <option value="">— Select an event —</option>
+          <option value="parade">Founders' Day Parade (Free)</option>
+          <option value="market">Farmers' Market Fest (₹50)</option>
+          <option value="sports">Youth Sports Gala (₹100/team)</option>
+          <option value="cultural">Cultural Festival (₹75)</option>
+        </select>
+        <div class="fee-display" id="feeDisplay"></div>
+      </div>
+      <!-- Message (Task 6 – key events, char count) -->
+      <div class="form-field full">
+        <label for="regMessage">Message / Special Requirements</label>
+        <textarea id="regMessage" name="message"
+                  placeholder="Any dietary needs, accessibility requirements or questions…"
+                  maxlength="300"
+                  onkeyup="countChars(this)"></textarea>
+        <span class="char-counter" id="charCount">0 / 300 characters</span>
+      </div>
+    </div>
+    <!-- Submit (Task 6 – onclick) -->
+    <div style="margin-top:1.5rem;display:flex;gap:1rem;align-items:center;">
+      <button class="btn-primary"
+              onclick="submitForm(event)"
+              style="font-size:1rem;padding:0.9rem 2.5rem;">
+        Confirm Registration
+      </button>
+    </div>
+    <output id="confirmMsg"></output>
+  </section>
+
+  <!-- Video Section (Task 7) -->
+  <section id="video-section">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Event Promo</div>
+        <h2 class="section-title">Watch the Invite</h2>
+      </div>
+    </div>
+    <div class="video-wrap">
+      <video id="promoVideo" controls preload="metadata"
+             oncanplay="onVideoReady()"
+             style="background:#0d0d0d;">
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="video-status" id="videoStatus" style="display:none;">
+      <span class="video-dot"></span>
+      <span id="videoStatusText">Video ready to play!</span>
+    </div>
+  </section>
+
+  <!-- User Preferences (Task 8) -->
+  <section id="preferences">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Settings</div>
+        <h2 class="section-title">Your Preferences</h2>
+      </div>
+    </div>
+    <div class="prefs-card">
+      <h3>Favourite Event Type</h3>
+      <p>We'll remember your choice and pre-select it next time you visit.</p>
+      <div class="prefs-row">
+        <select id="prefEvent" onchange="savePref(this)">
+          <option value="">— Pick your favourite —</option>
+          <option value="parade">Founders' Day Parade</option>
+          <option value="market">Farmers' Market Fest</option>
+          <option value="sports">Youth Sports Gala</option>
+          <option value="cultural">Cultural Festival</option>
+        </select>
+        <button class="btn-clear" onclick="clearPrefs()">Clear Preferences</button>
+      </div>
+      <div class="prefs-status" id="prefStatus"></div>
+    </div>
+  </section>
+
+  <!-- Geolocation (Task 9) -->
+  <section id="geolocation">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Location Services</div>
+        <h2 class="section-title">Find Nearby Events</h2>
+      </div>
+    </div>
+    <div class="geo-card">
+      <h3>Event Locator</h3>
+      <p>Allow location access to discover community events closest to you.</p>
+      <button class="btn-primary" onclick="findNearby()"
+              style="font-size:0.95rem;padding:0.85rem 2rem;">
+        📍 Find Nearby Events
+      </button>
+      <div class="geo-result" id="geoResult"></div>
+      <div class="geo-error" id="geoError"></div>
+    </div>
+  </section>
+
+  <!-- DevTools Info (Task 10) -->
+  <section id="devtools">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Developer Tools</div>
+        <h2 class="section-title">Debug & Inspect</h2>
+      </div>
+    </div>
+    <div class="devtools-grid">
+      <div class="dev-card">
+        <span class="dev-icon">🔍</span>
+        <h4>Inspect Element</h4>
+        <p>Right-click any element and choose "Inspect" to view and live-edit CSS styles in the Styles pane of DevTools.</p>
+      </div>
+      <div class="dev-card">
+        <span class="dev-icon">⚙️</span>
+        <h4>Console Logs</h4>
+        <p>Open the Console tab (F12) to view live logs from this portal. All form events, geolocation results and storage changes are logged.</p>
+      </div>
+      <div class="dev-card">
+        <span class="dev-icon">🔴</span>
+        <h4>Breakpoints</h4>
+        <p>Navigate to Sources → your JS file → click a line number to set a breakpoint. Reload to pause execution and inspect variable state.</p>
+      </div>
+    </div>
+    <div class="console-preview">
+      <div class="console-titlebar">
+        <span class="console-dot" style="background:#ff5f57;"></span>
+        <span class="console-dot" style="background:#ffbd2e;"></span>
+        <span class="console-dot" style="background:#28c840;"></span>
+        &nbsp; Console — CivicPulse Portal
+      </div>
+      <div class="console-body" id="consoleBody">
+        <div class="log-info">ℹ️ CivicPulse portal loaded</div>
+        <div class="log-success">✅ LocalStorage checked for saved preferences</div>
+        <div class="log-success">✅ DOM ready</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer (Task 1) -->
+  <footer>
+    <div class="brand">Civic<span>Pulse</span> &copy; 2025 City Council</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#events">Events</a>
+      <a href="#registration">Register</a>
+      <a href="help.html" target="_blank">Help</a>
+    </nav>
+  </footer>
+
+  <!-- Zoom Overlay (Task 6 – dblclick) -->
+  <div class="zoom-overlay" id="zoomOverlay" onclick="closeZoom()">
+    <button class="zoom-close" onclick="closeZoom()">✕ Close</button>
+    <div id="zoomContent" style="font-size:8rem;text-align:center;"></div>
+  </div>
+
+  <!-- Unload Warning Banner (Task 7 – onbeforeunload visual) -->
+  <div class="unload-banner" id="unloadBanner">
+    ⚠️ You have an unfinished registration form. Are you sure you want to leave?
+  </div>
+
+  <script>
+    /* ─── CONSOLE LOGGER ─── */
+    function log(msg, type = 'log') {
+      const body = document.getElementById('consoleBody');
+      if (!body) return;
+      const map = { info:'log-info', success:'log-success', warn:'log-warn', error:'log-error' };
+      const el = document.createElement('div');
+      el.className = map[type] || 'log-line';
+      const icons = { info:'ℹ️', success:'✅', warn:'⚠️', error:'❌' };
+      el.textContent = (icons[type] || '›') + ' ' + msg;
+      body.appendChild(el);
+      body.scrollTop = body.scrollHeight;
+    }
+
+    /* ─── TASK 6: Phone blur validation ─── */
+    function validatePhone(input) {
+      const val = input.value.replace(/\s/g, '');
+      const err = document.getElementById('phoneError');
+      const phoneRegex = /^(\+91|91|0)?[6-9]\d{9}$/;
+      if (val && !phoneRegex.test(val)) {
+        err.textContent = '⚠ Please enter a valid Indian phone number';
+        input.style.borderColor = '#c8440a';
+        log('Phone validation failed: ' + val, 'warn');
+      } else if (val) {
+        err.textContent = '✓ Valid phone number';
+        err.style.color = '#7fbf7f';
+        input.style.borderColor = 'rgba(90,122,95,0.6)';
+        log('Phone validated: ' + val, 'success');
+      } else {
+        err.textContent = '';
+        input.style.borderColor = '';
+      }
+    }
+
+    /* ─── TASK 6: Event fee display on change ─── */
+    const fees = {
+      parade: '🎉 Founders\' Day Parade — FREE ENTRY',
+      market: '🌾 Farmers\' Market Fest — ₹50 per person',
+      sports: '🏆 Youth Sports Gala — ₹100 per team',
+      cultural: '🎭 Cultural Festival — ₹75 per person'
+    };
+
+    function showFee(sel) {
+      const display = document.getElementById('feeDisplay');
+      if (sel.value && fees[sel.value]) {
+        display.textContent = fees[sel.value];
+        display.classList.add('show');
+        log('Event selected: ' + sel.options[sel.selectedIndex].text, 'info');
+
+        /* Also sync with preferences */
+        const prefSel = document.getElementById('prefEvent');
+        if (prefSel) prefSel.value = sel.value;
+      } else {
+        display.classList.remove('show');
+      }
+    }
+
+    /* ─── TASK 6: Textarea keyup char count ─── */
+    function countChars(textarea) {
+      const counter = document.getElementById('charCount');
+      const len = textarea.value.length;
+      counter.textContent = len + ' / 300 characters';
+      counter.className = 'char-counter' + (len > 250 ? ' warning' : '');
+    }
+
+    /* ─── TASK 5 & 6: Form submit ─── */
+    function submitForm(e) {
+      e.preventDefault();
+      const name = document.getElementById('regName').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const date = document.getElementById('regDate').value;
+      const event = document.getElementById('regEvent');
+      const eventText = event.options[event.selectedIndex]?.text || '';
+
+      if (!name || !email || !date || !event.value) {
+        log('Form submission failed — missing required fields', 'error');
+        const out = document.getElementById('confirmMsg');
+        out.textContent = '⚠ Please fill in all required fields before submitting.';
+        out.style.background = 'rgba(200,68,10,0.12)';
+        out.style.borderColor = 'rgba(200,68,10,0.4)';
+        out.style.color = '#ff9f7f';
+        out.className = 'show';
+        return;
+      }
+
+      const out = document.getElementById('confirmMsg');
+      out.textContent = `✅ Registration confirmed for ${name}! You're signed up for "${eventText}" on ${date}. A confirmation will be sent to ${email}.`;
+      out.style.background = '';
+      out.style.borderColor = '';
+      out.style.color = '';
+      out.className = 'show';
+      log('Registration submitted for: ' + name, 'success');
+      formDirty = false;
+    }
+
+    /* ─── TASK 7: Video ready ─── */
+    function onVideoReady() {
+      const status = document.getElementById('videoStatus');
+      status.style.display = 'flex';
+      log('  can play — ready state reached', 'success');
+    }
+
+    /* ─── TASK 7: onbeforeunload simulation ─── */
+    let formDirty = false;
+
+    document.getElementById('regName').addEventListener('input', () => { formDirty = true; });
+    document.getElementById('regEmail').addEventListener('input', () => { formDirty = true; });
+
+    window.addEventListener('beforeunload', (e) => {
+      if (formDirty) {
+        const banner = document.getElementById('unloadBanner');
+        banner.classList.add('show');
+        setTimeout(() => banner.classList.remove('show'), 4000);
+        e.preventDefault();
+        e.returnValue = 'You have unsaved changes. Leave anyway?';
+        log('User attempted to leave with unfinished form', 'warn');
+      }
+    });
+
+    /* ─── TASK 8: localStorage preferences ─── */
+    function savePref(sel) {
+      if (!sel.value) return;
+      localStorage.setItem('preferredEvent', sel.value);
+      sessionStorage.setItem('sessionEvent', sel.value);
+      document.getElementById('prefStatus').textContent =
+        '✓ Preference saved — will be pre-selected on your next visit.';
+      log('Preference saved to localStorage: ' + sel.value, 'success');
+
+      /* Also sync with registration form */
+      const regSel = document.getElementById('regEvent');
+      if (regSel) {
+        regSel.value = sel.value;
+        showFee(regSel);
+      }
+    }
+
+    function clearPrefs() {
+      localStorage.clear();
+      sessionStorage.clear();
+      document.getElementById('prefEvent').value = '';
+      document.getElementById('prefStatus').textContent =
+        '✓ All preferences cleared from localStorage and sessionStorage.';
+      log('localStorage and sessionStorage cleared', 'warn');
+    }
+
+    /* Restore preference on load */
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('preferredEvent');
+      if (saved) {
+        const prefSel = document.getElementById('prefEvent');
+        if (prefSel) {
+          prefSel.value = saved;
+          document.getElementById('prefStatus').textContent =
+            '✓ Restored your saved preference: ' + saved;
+        }
+        const regSel = document.getElementById('regEvent');
+        if (regSel && saved) {
+          regSel.value = saved;
+          showFee(regSel);
+        }
+        log('Preference restored from localStorage: ' + saved, 'info');
+      }
+
+      /* Set today's date as min for date field */
+      const dateField = document.getElementById('regDate');
+      if (dateField) {
+        dateField.min = new Date().toISOString().split('T')[0];
+      }
+    });
+
+    /* ─── TASK 9: Geolocation ─── */
+    function findNearby() {
+      const result = document.getElementById('geoResult');
+      const error = document.getElementById('geoError');
+      result.classList.remove('show');
+      error.classList.remove('show');
+      result.innerHTML = '⏳ Acquiring your location…';
+      result.classList.add('show');
+      log('Geolocation requested…', 'info');
+
+      if (!navigator.geolocation) {
+        error.textContent = '⚠ Geolocation is not supported by your browser.';
+        error.classList.add('show');
+        result.classList.remove('show');
+        log('Geolocation not supported', 'error');
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const { latitude, longitude, accuracy } = pos.coords;
+          result.innerHTML =
+            `📍 <strong>Location Found</strong><br>` +
+            `Latitude: ${latitude.toFixed(5)}<br>` +
+            `Longitude: ${longitude.toFixed(5)}<br>` +
+            `Accuracy: ±${Math.round(accuracy)}m<br><br>` +
+            `🔎 Searching for events near you…<br>` +
+            `✅ <strong>3 events found within 5 km!</strong>`;
+          log(`Location: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`, 'success');
+        },
+        (err) => {
+          result.classList.remove('show');
+          const msgs = {
+            1: '⛔ Permission denied. Please allow location access in your browser settings.',
+            2: '📡 Position unavailable. Could not determine your location.',
+            3: '⏱ Request timed out. Please try again.'
+          };
+          error.textContent = msgs[err.code] || '⚠ An unknown error occurred.';
+          error.classList.add('show');
+          log('Geolocation error: ' + error.textContent, 'error');
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0
+        }
+      );
+    }
+
+    /* ─── TASK 6: dblclick image zoom ─── */
+    function zoomImg(wrapper, emoji, title) {
+      const overlay = document.getElementById('zoomOverlay');
+      const content = document.getElementById('zoomContent');
+      content.innerHTML = `<div style="font-size:9rem;">${emoji}</div>
+        <p style="font-family:'Playfair Display',serif;color:rgba(250,248,243,0.7);font-size:1.2rem;margin-top:1rem;">${title}</p>`;
+      overlay.classList.add('show');
+      log('Image zoomed: ' + title, 'info');
+    }
+
+    function closeZoom() {
+      document.getElementById('zoomOverlay').classList.remove('show');
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeZoom();
+    });
+
+    log('DOM ready — all event listeners attached', 'success');
+  </script>
+</body>
+</html>
