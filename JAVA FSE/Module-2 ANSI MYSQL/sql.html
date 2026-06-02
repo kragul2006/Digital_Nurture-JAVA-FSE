@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SQL Explorer — Community Event Portal</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="sql.css" />
+</head>
+<body class="sql-page">
+
+  <!-- ══════════════════════════════════════
+       HEADER (shared with portal)
+  ══════════════════════════════════════ -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">🏘️</span>
+        <span class="logo-text">CommunityHub</span>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html">← Portal</a>
+        <a href="#schema">Schema</a>
+        <a href="#exercises">Exercises</a>
+        <a href="#runner">SQL Runner</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════
+       HERO
+  ══════════════════════════════════════ -->
+  <section class="sql-hero">
+    <div class="sql-hero-content">
+      <span class="sql-badge">Module 2 · ANSI SQL / MySQL</span>
+      <h1 class="sql-hero-title">SQL <span class="accent">Explorer</span></h1>
+      <p class="sql-hero-sub">25 real-world queries against the Community Event Portal database — schema, sample data, and an in-browser SQL runner all in one place.</p>
+      <div class="hero-ctas">
+        <a href="#exercises" class="btn-primary">View All Queries ↓</a>
+        <a href="#runner" class="btn-outline">Open SQL Runner</a>
+      </div>
+    </div>
+    <div class="hero-deco" aria-hidden="true">
+      <div class="deco-circle c1"></div>
+      <div class="deco-circle c2"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SCHEMA SECTION
+  ══════════════════════════════════════ -->
+  <section class="schema-section" id="schema">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2>Database Schema</h2>
+        <p class="section-sub">Six tables powering the Community Event Portal backend.</p>
+      </div>
+
+      <div class="schema-grid">
+
+        <div class="schema-card">
+          <div class="schema-card-header">
+            <span class="tbl-icon">👤</span>
+            <span class="tbl-name">users</span>
+          </div>
+          <table class="schema-table">
+            <thead><tr><th>Column</th><th>Type</th><th>Constraints</th></tr></thead>
+            <tbody>
+              <tr><td class="pk">user_id</td><td>INT</td><td>PK · AUTO_INCREMENT</td></tr>
+              <tr><td>full_name</td><td>VARCHAR(100)</td><td>NOT NULL</td></tr>
+              <tr><td>email</td><td>VARCHAR(100)</td><td>UNIQUE · NOT NULL</td></tr>
+              <tr><td>city</td><td>VARCHAR(100)</td><td>NOT NULL</td></tr>
+              <tr><td>registration_date</td><td>DATE</td><td>NOT NULL</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="schema-card">
+          <div class="schema-card-header">
+            <span class="tbl-icon">📅</span>
+            <span class="tbl-name">events</span>
+          </div>
+          <table class="schema-table">
+            <thead><tr><th>Column</th><th>Type</th><th>Constraints</th></tr></thead>
+            <tbody>
+              <tr><td class="pk">event_id</td><td>INT</td><td>PK · AUTO_INCREMENT</td></tr>
+              <tr><td>title</td><td>VARCHAR(200)</td><td>NOT NULL</td></tr>
+              <tr><td>description</td><td>TEXT</td><td>—</td></tr>
+              <tr><td>city</td><td>VARCHAR(100)</td><td>NOT NULL</td></tr>
+              <tr><td>start_date</td><td>DATETIME</td><td>NOT NULL</td></tr>
+              <tr><td>end_date</td><td>DATETIME</td><td>NOT NULL</td></tr>
+              <tr><td>status</td><td>ENUM</td><td>upcoming/completed/cancelled</td></tr>
+              <tr><td class="fk">organizer_id</td><td>INT</td><td>FK → users(user_id)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="schema-card">
+          <div class="schema-card-header">
+            <span class="tbl-icon">🎤</span>
+            <span class="tbl-name">sessions</span>
+          </div>
+          <table class="schema-table">
+            <thead><tr><th>Column</th><th>Type</th><th>Constraints</th></tr></thead>
+            <tbody>
+              <tr><td class="pk">session_id</td><td>INT</td><td>PK · AUTO_INCREMENT</td></tr>
+              <tr><td class="fk">event_id</td><td>INT</td><td>FK → events(event_id)</td></tr>
+              <tr><td>title</td><td>VARCHAR(200)</td><td>NOT NULL</td></tr>
+              <tr><td>speaker_name</td><td>VARCHAR(100)</td><td>NOT NULL</td></tr>
+              <tr><td>start_time</td><td>DATETIME</td><td>NOT NULL</td></tr>
+              <tr><td>end_time</td><td>DATETIME</td><td>NOT NULL</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="schema-card">
+          <div class="schema-card-header">
+            <span class="tbl-icon">📝</span>
+            <span class="tbl-name">registrations</span>
+          </div>
+          <table class="schema-table">
+            <thead><tr><th>Column</th><th>Type</th><th>Constraints</th></tr></thead>
+            <tbody>
+              <tr><td class="pk">registration_id</td><td>INT</td><td>PK · AUTO_INCREMENT</td></tr>
+              <tr><td class="fk">user_id</td><td>INT</td><td>FK → users(user_id)</td></tr>
+              <tr><td class="fk">event_id</td><td>INT</td><td>FK → events(event_id)</td></tr>
+              <tr><td>registration_date</td><td>DATE</td><td>NOT NULL</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="schema-card">
+          <div class="schema-card-header">
+            <span class="tbl-icon">⭐</span>
+            <span class="tbl-name">feedback</span>
+          </div>
+          <table class="schema-table">
+            <thead><tr><th>Column</th><th>Type</th><th>Constraints</th></tr></thead>
+            <tbody>
+              <tr><td class="pk">feedback_id</td><td>INT</td><td>PK · AUTO_INCREMENT</td></tr>
+              <tr><td class="fk">user_id</td><td>INT</td><td>FK → users(user_id)</td></tr>
+              <tr><td class="fk">event_id</td><td>INT</td><td>FK → events(event_id)</td></tr>
+              <tr><td>rating</td><td>INT</td><td>CHECK (1–5)</td></tr>
+              <tr><td>comments</td><td>TEXT</td><td>—</td></tr>
+              <tr><td>feedback_date</td><td>DATE</td><td>NOT NULL</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="schema-card">
+          <div class="schema-card-header">
+            <span class="tbl-icon">📁</span>
+            <span class="tbl-name">resources</span>
+          </div>
+          <table class="schema-table">
+            <thead><tr><th>Column</th><th>Type</th><th>Constraints</th></tr></thead>
+            <tbody>
+              <tr><td class="pk">resource_id</td><td>INT</td><td>PK · AUTO_INCREMENT</td></tr>
+              <tr><td class="fk">event_id</td><td>INT</td><td>FK → events(event_id)</td></tr>
+              <tr><td>resource_type</td><td>ENUM</td><td>pdf/image/link</td></tr>
+              <tr><td>resource_url</td><td>VARCHAR(255)</td><td>NOT NULL</td></tr>
+              <tr><td>uploaded_at</td><td>DATETIME</td><td>NOT NULL</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div><!-- /schema-grid -->
+
+      <!-- ERD hint -->
+      <div class="erd-note">
+        <span class="erd-icon">🔗</span>
+        <span><strong>Relationships:</strong> events.organizer_id → users · sessions.event_id → events · registrations.user_id → users · registrations.event_id → events · feedback.user_id → users · feedback.event_id → events · resources.event_id → events</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       EXERCISE CARDS
+  ══════════════════════════════════════ -->
+  <section class="exercises-section" id="exercises">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2>All 25 SQL Exercises</h2>
+        <p class="section-sub">Click any card to expand the query and explanation.</p>
+      </div>
+
+      <!-- Filter tabs -->
+      <div class="exercise-tabs" id="exerciseTabs">
+        <button class="tab-btn active" data-filter="all">All (25)</button>
+        <button class="tab-btn" data-filter="select">SELECT</button>
+        <button class="tab-btn" data-filter="join">JOINs</button>
+        <button class="tab-btn" data-filter="aggregate">Aggregates</button>
+        <button class="tab-btn" data-filter="subquery">Subqueries</button>
+        <button class="tab-btn" data-filter="window">Advanced</button>
+      </div>
+
+      <div class="exercises-grid" id="exercisesGrid">
+        <!-- Injected by sql.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       IN-BROWSER SQL RUNNER
+  ══════════════════════════════════════ -->
+  <section class="runner-section" id="runner">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2>SQL Runner</h2>
+        <p class="section-sub">Run any exercise query against the in-memory sample database (powered by sql.js / SQLite). Select a query from the exercises above or write your own.</p>
+      </div>
+
+      <div class="runner-layout">
+        <div class="runner-editor-wrap">
+          <div class="editor-toolbar">
+            <span class="editor-label">SQL Editor</span>
+            <div class="editor-actions">
+              <button id="btnClear" class="btn-tool" title="Clear editor">✕ Clear</button>
+              <button id="btnFormat" class="btn-tool" title="Format SQL">⌥ Format</button>
+              <button id="btnRun" class="btn-run" title="Run query (Ctrl+Enter)">▶ Run Query</button>
+            </div>
+          </div>
+          <textarea id="sqlEditor" spellcheck="false" placeholder="-- Write or paste SQL here, or click an exercise card above
+SELECT e.title, COUNT(r.registration_id) AS total_registrations
+FROM events e
+LEFT JOIN registrations r ON r.event_id = e.event_id
+GROUP BY e.event_id, e.title
+ORDER BY total_registrations DESC
+LIMIT 3;"></textarea>
+          <div class="editor-hint">Ctrl + Enter to run &nbsp;·&nbsp; Cmd + Enter on Mac</div>
+        </div>
+
+        <div class="runner-results-wrap">
+          <div class="results-toolbar">
+            <span class="results-label" id="resultsLabel">Results</span>
+            <span class="results-meta" id="resultsMeta"></span>
+          </div>
+          <div id="resultsArea" class="results-area">
+            <div class="results-placeholder">
+              <span class="placeholder-icon">⚡</span>
+              <p>Run a query to see results here.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════ -->
+  <footer class="site-footer">
+    <p>© 2025 CommunityHub · <a href="index.html" style="color:var(--accent);">← Back to Portal</a></p>
+    <p class="footer-note">Module 2 · ANSI SQL Using MySQL · All 25 exercises</p>
+  </footer>
+
+  <!-- sql.js WASM (SQLite in browser) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.2/sql-wasm.js"></script>
+  <script src="sql.js"></script>
+</body>
+</html>
